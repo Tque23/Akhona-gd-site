@@ -1,0 +1,124 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <canvas id="wave-canvas"></canvas>
+    
+    <div class="page-content-wrapper">
+        <div class="breadcrumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="breadcrumb-inner text-center">
+                            <h1 class="title split-collab">You Shouldn't Be Here</h1>
+                            <ul class="page-list">
+                                <li class="tmp-breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="icon"><i class="fa-solid fa-angle-right"></i></li>
+                                <li class="tmp-breadcrumb-item active">Lost</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="get-in-touch-area tmp-section-gap">
+            <div class="container">
+            <div class="contact-get-in-touch-wrap">
+                <div class="get-in-touch-wrapper tmponhover tmp-scroll-trigger tmp-fade-in">
+                    <div class="glass-panel">
+                        <div class="brand">AZungu Graphic Design</div>
+                        
+                        <h1 class="title">
+                            Something bold is <span class="highlight">brewing.</span>
+                        </h1>
+                        
+                        <p class="description">
+                            I'm currently crafting a new digital experience to showcase my latest visual work and creative projects. 
+                            Drop your email below to be the first to know when the full portfolio goes live.
+                        </p>
+
+                        <li><a href="#" class="openServicesModal submit-btn">Request Services</a></li>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('wave-canvas') as HTMLCanvasElement;
+        
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let width: number, height: number;
+            let time = 0;
+
+            // Fit canvas to the full browser window
+            const resize = () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            };
+            
+            window.addEventListener('resize', resize);
+            resize();
+
+            const draw = () => {
+                if (!ctx) return;
+                
+                // Clear the frame for continuous drawing
+                ctx.clearRect(0, 0, width, height);
+                
+                // Styling the lines
+                ctx.lineWidth = 0.6; // Very thin
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)'; // Faint grey lines
+
+                // Helper to draw grouped flowing ribbons
+                const drawRibbonGroup = (baseY: number, amplitude: number, phaseOffset: number, lineCount: number, spacing: number, speedDirection: number) => {
+                    for (let i = 0; i < lineCount; i++) {
+                        ctx.beginPath();
+                        // Drawing points across the screen
+                        for (let x = 0; x <= width; x += 15) {
+                            const normalizedX = x / width;
+                            let y = baseY + (i * spacing);
+                            
+                            // Combine multiple sine waves to create topographical organic curves
+                            y += Math.sin(normalizedX * 3.0 + time * 0.4 * speedDirection + phaseOffset) * amplitude;
+                            y += Math.sin(normalizedX * 1.5 - time * 0.2 + i * 0.05) * (amplitude * 0.5);
+                            
+                            if (x === 0) {
+                                ctx.moveTo(x, y);
+                            } else {
+                                ctx.lineTo(x, y);
+                            }
+                        }
+                        ctx.stroke();
+                    }
+                };
+
+                // Render negative space and line groups across the whole screen height
+                
+                // 1. Top Right flowing lines
+                drawRibbonGroup(height * 0.1, height * 0.2, 1.5, 15, 12, 1);
+                
+                // 2. Middle sweeping lines
+                drawRibbonGroup(height * 0.5, height * 0.25, 3.0, 8, 20, -1);
+                
+                // 3. Bottom Left dense sweeping lines
+                drawRibbonGroup(height * 0.9, height * 0.2, 4.0, 22, -10, -1);
+                
+                // 4. Bottom Right arching waves
+                drawRibbonGroup(height * 1.1, -(height * 0.15), 2.5, 12, -8, 1);
+
+                // Increment time for continuous flowing animation
+                time += 0.012;
+                requestAnimationFrame(draw);
+            };
+            
+            draw();
+        }
+    });
+</script>

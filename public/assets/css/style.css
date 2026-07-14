@@ -26800,3 +26800,197 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
         /* Ensure inner sections are transparent so the canvas shows through */
         background: transparent; 
     }
+
+      /* Import the modern font directly into this component */
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+  :root {
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --accent: #ffb703;
+  }
+
+  /* Main wrapper to replace the body styling from the previous example */
+  .coming-soon-wrapper {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Positions your canvas directly behind the glass panel */
+  #wave-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none; /* Allows clicks to pass through to the background if needed */
+  }
+
+  /* Animated Gradient Background */
+  .background-anim {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, #2e004f, #020024, #001233);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    z-index: -1;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Main Container */
+  .container {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    position: relative;
+    z-index: 1; /* Keeps content above the canvas */
+  }
+
+  /* Glassmorphism Panel */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 4rem;
+    text-align: center;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .brand {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .highlight {
+    color: #FF8C33;
+    position: relative;
+    display: inline-block;
+  }
+
+  .description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto 3rem;
+  }
+
+  /* Form Styles */
+  .notify-form {
+    display: flex;
+    gap: 10px;
+    max-width: 450px;
+    margin: 0 auto 3rem;
+  }
+
+  .email-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .email-input:focus {
+    border-color: var(--accent);
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .email-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .submit-btn {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: none;
+    background: var(--text-primary);
+    color: #000;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* Social Links */
+  .social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .social-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+  }
+
+  .social-links a:hover {
+    color: var(--accent);
+  }
+
+  .divider {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.8rem;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .glass-panel {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .title {
+      font-size: 2.8rem;
+    }
+
+    .notify-form {
+      flex-direction: column;
+    }
+
+    .submit-btn {
+      width: 100%;
+    }
+  }
