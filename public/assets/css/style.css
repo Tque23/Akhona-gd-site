@@ -26863,14 +26863,7 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
 
   /* Glassmorphism Panel */
   .glass-panel {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 4rem;
     text-align: center;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   }
 
   .brand {
