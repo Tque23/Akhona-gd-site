@@ -1,17 +1,552 @@
 ---
-
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+    <div class="rpp-banner-three-area">
+        <div class="container">
+            <div class="banner-three-main-wrapper">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="inner">
+                            <span class="sub-title tmp-scroll-trigger tmp-fade-in animation-order-1">Hello I'm</span>
+                            <h1 class="title tmp-scroll-trigger tmp-fade-in animation-order-2">Lindelwa (Akhona) Zungu</h1>
+                            <div class="button-area-banner-three tmp-scroll-trigger tmp-fade-in animation-order-3">
+                                <a class="tmp-btn hover-icon-reverse radius-round" href="javascript:void(0);" id="openPortfolioModal">
+                                    <span class="icon-reverse-wrapper">
+                                        <span class="btn-text">Request Portfolio</span>
+                                        <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                                        <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="banner-right-content">
+                            <div class="about-me tmp-scroll-trigger tmp-fade-in animation-order-1">
+                                <h3 class="title">About Me</h3>
+                                <p class="para"><span>Digital Marketer</span> with a sharp commercial mindset and strong technical instincts. I combine <span>Strategy</span>, <span>Creativity</span>, and <span>Execution</span> to drive growth, build brands, and deliver measurable impact.</p>
+                            </div>
+                            <div class="find-me-on mt--40 tmp-scroll-trigger tmp-fade-in animation-order-2">
+                                <h2 class="find-me-on-title">Find Me On</h2>
+                                <div class="social-link banner">
+                                    <a href="https://www.instagram.com/aszungu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="https://www.linkedin.com/in/aszungu" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+                                    <a href="https://wa.me/27774204639" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-benner-img-three">
+                    <img class="tmp-scroll-trigger tmp-zoom-in animation-order-2" src="assets/images/banner/banner-user-image-three.png" alt="Akhona Zungu Banner Portrait">
+                </div>
+                <h2 class="texts-one up-down-2">GROWTH DEV</h2>
+                <h2 class="texts-two up-down">GROWTH DEV</h2>
+            </div>
+        </div>
+    </div>
+
+    <section class="counter-area">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-12 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="year-of-expariance-wrapper bg-blur-style-one tmp-scroll-trigger tmp-fade-in animation-order-1">
+                        <div class="year-expariance-wrap">
+                            <h2 class="counter year-number"><span class="odometer" data-count="5">00</span>
+                            </h2>
+                            <h3 class="year-title">Years of <br> experience</h3>
+                        </div>
+                        <p class="year-para">Business consulting consultants provide expert advice and guida the a
+                            businesses to help theme their performance efficiency</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="counter-area-right-content">
+                        <div class="row g-5">
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="counter-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-1">
+                                    <h3 class="counter counter-title"><span class="odometer" data-count="43">00</span>+
+                                    </h3>
+                                    <p class="counter-para">Projects Completed</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="counter-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-2">
+                                    <h3 class="counter counter-title"><span class="odometer" data-count="03">00</span>
+                                    </h3>
+                                    <p class="counter-para">Upcoming Projects</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="counter-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-3">
+                                    <h3 class="counter counter-title"><span class="odometer" data-count="10">00</span>+
+                                    </h3>
+                                    <p class="counter-para">Client Reviews</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="counter-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-4">
+                                    <h3 class="counter counter-title"><span class="odometer" data-count="06">00</span>
+                                    </h3>
+                                    <p class="counter-para">Reference Letters</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="latest-service-area tmp-section-gapTop">
+        <div class="container">
+            <div class="section-head mb--60">
+                <div class="section-sub-title center-title tmp-scroll-trigger tmp-fade-in animation-order-1">
+                    <span class="subtitle">The Workflow</span>
+                </div>
+                <h2 class="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">Seamless Execution, Transparent Results.</h2>
+                <p class="description section-sm tmp-scroll-trigger tmp-fade-in animation-order-3"> How I partner with your business to streamline project delivery from the initial strategy session to the final handover. </p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="service-card-v2 tmponhover tmp-scroll-trigger tmp-fade-in animation-order-1">
+                        <h2 class="service-card-num"><span>01.</span>Discovery & Alignment</h2>
+                        <p class="service-para">We align on your business goals, budget, and timeline to build a clear, transparent project roadmap.</p>
+                    </div>
+                    <div class="service-card-v2 tmponhover tmp-scroll-trigger tmp-fade-in animation-order-2">
+                        <h2 class="service-card-num"><span>02.</span>Design & Development</h2>
+                        <p class="service-para">We build your project in structured stages, collaborating at every milestone to bring your vision to life.</p>
+                    </div>
+                    <div class="service-card-v2 tmponhover tmp-scroll-trigger tmp-fade-in animation-order-3">
+                        <h2 class="service-card-num"><span>03.</span>Launch & Support</h2>
+                        <p class="service-para">We deliver your completed assets with full training and strategic insights to ensure your long-term success.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-card-user-image">
+                        <img class="tmp-scroll-trigger tmp-zoom-in animation-order-1" src="assets/images/services/latest-services-user-image-two.png" alt="Latest User Services Preview">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="my-skill tmp-section-gapTop">
+        <div class="container">
+            <div class="section-head text-align-left mb--60">
+                <div class="section-sub-title tmp-scroll-trigger tmp-fade-in animation-order-1">
+                    <span class="subtitle">Capabilities & Toolkit</span>
+                </div>
+                <h2 class="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">A comprehensive toolkit blending technical execution <br> with creative digital strategy.</h2>
+            </div>
+            <div class="services-widget v1">
+                <div class="service-item current tmp-scroll-trigger tmp-fade-in animation-order-1">
+                    <div class="my-skill-card">
+                        <div class="card-icon">
+                            <i class="fa-light fa-building-columns" aria-hidden="true"></i>
+                        </div>
+                        <div class="card-title">
+                            <h3 class="main-title">Graphic Design</h3>
+                            <p class="sub-title">Adobe Photoshop, Adobe Illustrator, Canva</p>
+                        </div>
+                        <p class="card-para">I design visual identities that tell your brand’s unique story. From logos to digital marketing assets, my goal is to create cohesive, intentional designs that don’t just look beautiful, but truly resonate with your audience.</p>
+                        <a href="#" class="read-more-btn">Read More <span class="read-more-icon"><i class="fa-solid fa-angle-right" aria-hidden="true"></i></span></a>
+                    </div>
+                    <button class="service-link modal-popup" aria-label="Open Graphic Design Info"></button>
+                </div>
+                <div class="service-item tmp-scroll-trigger tmp-fade-in animation-order-2">
+                    <div class="my-skill-card">
+                        <div class="card-icon">
+                            <i class="fa-light fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <div class="card-title">
+                            <h3 class="main-title">Web Development</h3>
+                            <p class="sub-title">HTML, CSS, JavaScript, React</p>
+                        </div>
+                        <p class="card-para">I don’t just write code; I build tailored digital experiences. I create fast, secure, and mobile-friendly websites designed to guide your visitors seamlessly from first click to final conversion.</p>
+                        <a href="#" class="read-more-btn">Read More <span class="read-more-icon"><i class="fa-solid fa-angle-right" aria-hidden="true"></i></span></a>
+                    </div>
+                    <button class="service-link modal-popup" aria-label="Open Web Development Info"></button>
+                </div>
+                <div class="service-item tmp-scroll-trigger tmp-fade-in animation-order-3">
+                    <div class="my-skill-card">
+                        <div class="card-icon">
+                            <i class="fa-light fa-pen-nib" aria-hidden="true"></i>
+                        </div>
+                        <div class="card-title">
+                            <h3 class="main-title">Social Media Management</h3>
+                            <p class="sub-title">Instagram, Facebook, TikTok</p>
+                        </div>
+                        <p class="card-para">I take the guesswork out of your online presence. By crafting custom content strategies and engaging directly with your audience, I help you build a loyal online community while you focus on running your business.</p>
+                        <a href="#" class="read-more-btn">Read More <span class="read-more-icon"><i class="fa-solid fa-angle-right" aria-hidden="true"></i></span></a>
+                    </div>
+                    <button class="service-link modal-popup" aria-label="Open Social Media Management Info"></button>
+                </div>
+                <div class="active-bg wow fadeInUp mleave"></div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="our-price-plan-area tmp-section-gapTop">
+        <div class="container">
+            <div class="section-head mb--50">
+                <div class="section-sub-title center-title tmp-scroll-trigger tmp-fade-in animation-order-1">
+                    <span class="subtitle">Select Your Investment</span>
+                </div>
+                <h2 class="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">Choose the perfect plan<br> tailored to your business goals and current growth stage.</h2>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="price-plan-card tmponhover blur-style-two tmp-scroll-trigger tmp-fade-in animation-order-1">
+                        <span class="price-sub-title">Graphic Design</span>
+                        <h3 class="main-price">R350.00</h3>
+                        <p class="per-month">From*</p>
+                        <div class="check-box">
+                            <ul>
+                                <li>
+                                    <div class="check-box-item">
+                                        <div class="box-icon">
+                                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="box-para">Brand Identity</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="check-box-item">
+                                        <div class="box-icon">
+                                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="box-para">Marketing Impact</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="check-box-item">
+                                        <div class="box-icon">
+                                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="box-para">Professional Polish</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tmp-button-here">
+                            <a class="tmp-btn hover-icon-reverse btn-border btn-md radius-round" href="contact.html">
+                                <span class="icon-reverse-wrapper">
+                    <span class="btn-text">Get in Touch</span>
+                                <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                                <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 tmp-scroll-trigger tmp-fade-in animation-order-2">
+                    <div class="price-plan-card tmponhover blur-style-two active">
+                        <span class="price-sub-title">Web Development</span>
+                        <h3 class="main-price">R4 000.00</h3>
+                        <p class="per-month">From*</p>
+                        <div class="check-box">
+                            <ul>
+                                <li>
+                                    <div class="check-box-item">
+                                        <div class="box-icon">
+                                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="box-para">Scalable Solutions</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="check-box-item">
+                                        <div class="box-icon">
+                                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="box-para">User-Friendly Design</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="check-box-item">
+                                        <div class="box-icon">
+                                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="box-para">Performance & SEO</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="check-box-item">
+                                        <div class="box-icon">
+                                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="box-para">Data-Driven Insights</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="check-box-item">
+                                        <div class="box-icon">
+                                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="box-para">24/7 Support</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tmp-button-here">
+                            <a class="tmp-btn hover-icon-reverse btn-md radius-round" href="contact.html">
+                                <span class="icon-reverse-wrapper">
+                    <span class="btn-text">Get Started</span>
+                                <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                                <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="price-plan-card tmponhover blur-style-two tmp-scroll-trigger tmp-fade-in animation-order-3">
+                        <span class="price-sub-title">Social Media Management</span>
+                        <h3 class="main-price">R1 500.00</h3>
+                        <p class="per-month">From (p/m)</p>
+                        <div class="check-box">
+                            <ul>
+                                <li>
+                                    <div class="check-box-item">
+                                        <div class="box-icon">
+                                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="box-para">Brand Presence & Visibility</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="check-box-item">
+                                        <div class="box-icon">
+                                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="box-para">Audience Engagement & Growth</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="check-box-item">
+                                        <div class="box-icon">
+                                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="box-para">Data-Driven Results</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tmp-button-here">
+                            <a class="tmp-btn hover-icon-reverse btn-border btn-md radius-round" href="contact.html">
+                                <span class="icon-reverse-wrapper">
+                    <span class="btn-text">Get a Tailored Quote</span>
+                                <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                                <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-area tmp-section-gapTop">
+        <div class="container">
+            <div class="section-head mb--50">
+                <div class="section-sub-title center-title tmp-scroll-trigger tmp-fade-in animation-order-1">
+                    <span class="subtitle">What Clients Say</span>
+                </div>
+                <h2 class="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">Shared success,<br> in their own words.</h2>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-12">
+                    <div class="swiper-testimonials-area-wrapper-card">
+                        <div class="swiper swiper-testimonials-2">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card tmponhover style-2 tmp-scroll-trigger animation-order-1">
+                                        <div class="content">
+                                            <div class="testimonital-icon">
+                                                <img src="assets/images/icons/quote.svg" alt="" aria-hidden="true">
+                                            </div>
+                                            <h2 class="text-doc">A personal portfolio is a curated collection of an individual's professional work, showcasing their skilA personal portfolio is a curated collection of an individual's professional work, showcasing their skills, </h2>
+                                            <h3 class="card-title">Cameron Williamson</h3>
+                                            <p class="card-para">Ui/Ux Designer</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card tmponhover style-2 tmp-scroll-trigger animation-order-2">
+                                        <div class="content">
+                                            <div class="testimonital-icon">
+                                                <img src="assets/images/icons/quote.svg" alt="" aria-hidden="true">
+                                            </div>
+                                            <h2 class="text-doc">A personal portfolio is a curated collection of an individual's professional work, showcasing their skilA personal portfolio is a curated collection of an individual's professional work, showcasing their skills, </h2>
+                                            <h3 class="card-title">Leslie Alexander</h3>
+                                            <p class="card-para">Ui/Ux Designer</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card tmponhover style-2 tmp-scroll-trigger animation-order-1">
+                                        <div class="content">
+                                            <div class="testimonital-icon">
+                                                <img src="assets/images/icons/quote.svg" alt="" aria-hidden="true">
+                                            </div>
+                                            <h2 class="text-doc">A personal portfolio is a curated collection of an individual's professional work, showcasing their skilA personal portfolio is a curated collection of an individual's professional work, showcasing their skills, </h2>
+                                            <h3 class="card-title">Cameron Williamson</h3>
+                                            <p class="card-para">Ui/Ux Designer</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card tmponhover style-2 tmp-scroll-trigger animation-order-2">
+                                        <div class="content">
+                                            <div class="testimonital-icon">
+                                                <img src="assets/images/icons/quote.svg" alt="" aria-hidden="true">
+                                            </div>
+                                            <h2 class="text-doc">A personal portfolio is a curated collection of an individual's professional work, showcasing their skilA personal portfolio is a curated collection of an individual's professional work, showcasing their skills, </h2>
+                                            <h3 class="card-title">Leslie Alexander</h3>
+                                            <p class="card-para">Ui/Ux Designer</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog-and-news-are tmp-section-gap">
+        <div class="container">
+            <div class="section-head mb--50">
+                <div class="section-sub-title center-title tmp-scroll-trigger tmp-fade-in animation-order-1">
+                    <span class="subtitle">Industry Insights</span>
+                </div>
+                <h2 class="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">Actionable strategies, digital trends,<br> and creative ideas to help your business grow.</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="blog-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-1">
+                        <div class="img-box">
+                            <a href="blog-details.html">
+                                <img class="img-primary hidden-on-mobile" src="assets/images/blog/blog-img-4.jpg" alt="Blog Post Thumbnail 1">
+                                <img class="img-secondary" src="assets/images/blog/blog-img-4.jpg" alt="Blog Post Thumbnail 1 Hover">
+                            </a>
+                            <ul class="blog-tags">
+                                <li><span class="tag-icon"><i class="fa-regular fa-user" aria-hidden="true"></i></span>Mesbah</li>
+                                <li><span class="tag-icon"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i></span>April 10</li>
+                            </ul>
+                        </div>
+                        <div class="blog-content-wrap">
+                            <h3 class="blog-title v2"><a class="link" href="blog-details.html">Let’s bring your ideas to life! Contact me, and let’s</a></h3>
+                            <a href="blog-details.html" class="read-more-btn v2">Read More <span class="read-more-icon"><i class="fa-solid fa-angle-right" aria-hidden="true"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="blog-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-2">
+                        <div class="img-box">
+                            <a href="blog-details.html">
+                                <img class="img-primary hidden-on-mobile" src="assets/images/blog/blog-img-5.jpg" alt="Blog Post Thumbnail 2">
+                                <img class="img-secondary" src="assets/images/blog/blog-img-5.jpg" alt="Blog Post Thumbnail 2 Hover">
+                            </a>
+                            <ul class="blog-tags">
+                                <li><span class="tag-icon"><i class="fa-regular fa-user" aria-hidden="true"></i></span>Mesbah</li>
+                                <li><span class="tag-icon"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i></span>April 10</li>
+                            </ul>
+                        </div>
+                        <div class="blog-content-wrap">
+                            <h3 class="blog-title v2"><a class="link" href="blog-details.html">Inspiring the World, One Project at a Time for the man</a></h3>
+                            <a href="blog-details.html" class="read-more-btn v2">Read More <span class="read-more-icon"><i class="fa-solid fa-angle-right" aria-hidden="true"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="blog-card tmp-hover-link tmp-scroll-trigger tmp-fade-in animation-order-3">
+                        <div class="img-box">
+                            <a href="blog-details.html">
+                                <img class="img-primary hidden-on-mobile" src="assets/images/blog/blog-img-6.jpg" alt="Blog Post Thumbnail 3">
+                                <img class="img-secondary" src="assets/images/blog/blog-img-6.jpg" alt="Blog Post Thumbnail 3 Hover">
+                            </a>
+                            <ul class="blog-tags">
+                                <li><span class="tag-icon"><i class="fa-regular fa-user" aria-hidden="true"></i></span>Mesbah</li>
+                                <li><span class="tag-icon"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i></span>April 10</li>
+                            </ul>
+                        </div>
+                        <div class="blog-content-wrap">
+                            <h3 class="blog-title v2"><a class="link" href="blog-details.html">Each one showcases my approach and dedication man</a></h3>
+                            <a href="blog-details.html" class="read-more-btn v2">Read More <span class="read-more-icon"><i class="fa-solid fa-angle-right" aria-hidden="true"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="portfolioModal" class="portfolio-modal-overlay">
+        <div class="portfolio-modal-glass  tmponhover">
+            <span class="portfolio-modal-close" id="closePortfolioModal">&times;</span>
+            <h3 class="modal-title">Request My Portfolio</h3>
+            <p class="modal-subtitle">Fill in your details and I'll send it right over.</p>
+            
+            <form id="portfolioForm" class="portfolio-form">
+                <div class="form-group">
+                    <label for="reqName">Name <span class="required">*</span></label>
+                    <input type="text" id="reqName" name="reqName" required placeholder="John Doe">
+                </div>
+                
+                <div class="form-group">
+                    <label for="reqCompany">Company</label>
+                    <input type="text" id="reqCompany" name="reqCompany" placeholder="Your Company Ltd.">
+                </div>
+                
+                <div class="form-group">
+                    <label for="reqEmail">Email Address <span class="required">*</span></label>
+                    <input type="email" id="reqEmail" name="reqEmail" required placeholder="john@example.com">
+                </div>
+                
+                <button type="submit" class="tmp-btn hover-icon-reverse radius-round w-100">
+                    <span class="icon-reverse-wrapper">
+                        <span class="btn-text">Send Request</span>
+                        <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                        <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                    </span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById("portfolioModal");
+            const openBtn = document.getElementById("openPortfolioModal");
+            const closeBtn = document.getElementById("closePortfolioModal");
+
+            // Open modal on button click
+            if (openBtn) {
+                openBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.classList.add("show");
+                });
+            }
+
+            // Close modal on 'X' click
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modal.classList.remove("show");
+                });
+            }
+
+            // Close modal when clicking outside the glass box
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.classList.remove("show");
+                }
+            });
+        });
+    </script>
+</Layout>

@@ -1,0 +1,400 @@
+---
+// src/layouts/Layout.astro
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Akhona Zungu | Digital Marketer & Front-End Developer in South Africa</title>
+    <meta name="description" content="Akhona Zungu is a South African Digital Marketer and Front-End Developer specializing in high-performance websites, branding, and social media strategies that drive measurable business growth.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://azungu.co.za/">
+
+    <meta property="og:title" content="Akhona Zungu | Digital Strategy & Web Development">
+    <meta property="og:description" content="Web development, branding, and social media strategies designed to elevate modern businesses.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://azungu.co.za/">
+    <meta property="og:image" content="https://azungu.co.za/assets/images/logo/man.png">
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg">
+
+    <link rel="stylesheet" href="assets/css/vendor/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/plugins/swiper.css">
+    <link rel="stylesheet" href="assets/css/plugins/odometer.css">
+    <link rel="stylesheet" href="assets/css/vendor/animate.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+</head>
+
+<body class="color-primary-2nd">
+
+    <header class="tmp-header-area-start header-one header--sticky header--transparent">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="header-content">
+                        <div class="logo">
+                            <a href="/">
+                                <img class="logo-dark" src="assets/images/logo/white-logo-reeni-2.png" alt="Akhona Zungu Dark Logo">
+                                <img class="logo-white" src="assets/images/logo/logo-white.png" alt="Akhona Zungu White Logo">
+                            </a>
+                        </div>
+                        <nav class="tmp-mainmenu-nav d-none d-xl-block">
+                            <ul class="tmp-mainmenu">
+                                <li>
+                                    <a href="/">Home</a>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">Client Portal
+                                        <i class="fa-regular fa-chevron-down"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                        <li><a href="#" class="openServicesModal">Request Services</a></li>
+                                        <li><a href="log-in.html">Log In</a></li>
+                                        <li><a href="help.html">Help</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="Projects.html">Projects</a>
+                                </li>
+                                <li>
+                                    <a href="/contact">Contact</a>
+                                </li>
+                            </ul>
+
+                        </nav>
+                        <div class="tmp-header-right">
+                            <div class="social-share-wrapper d-none d-md-block">
+                                <div class="social-link">
+                                    <a href="https://www.instagram.com/aszungu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="https://www.linkedin.com/in/aszungu" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                            <div class="actions-area">
+                                <div class="tmp-side-collups-area d-none d-xl-block">
+                                    <button class="tmp-menu-bars tmp_button_active"><i class="fa-regular fa-bars-staggered" aria-hidden="true"></i></button>
+                                </div>
+                                <div class="tmp-side-collups-area d-block d-xl-none">
+                                    <button class="tmp-menu-bars humberger_menu_active"><i class="fa-regular fa-bars-staggered" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="d-none d-xl-block">
+        <div class="tmp-sidebar-area tmp_side_bar">
+            <div class="inner">
+                <div class="top-area">
+                    <a href="/" class="logo">
+                        <img class="logo-dark" src="assets/images/logo/white-logo-reeni.png" alt="Akhona Zungu Dark Logo">
+                        <img class="logo-white" src="assets/images/logo/logo-white.png" alt="Akhona Zungu White Logo">
+                    </a>
+                    <div class="close-icon-area">
+                        <button class="tmp-round-action-btn close_side_menu_active">
+                            <i class="fa-sharp fa-light fa-xmark" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="content-wrapper">
+                    <div class="image-area-feature">
+                        <a href="/">
+                            <img src="assets/images/logo/man.png" alt="Akhona Zungu Avatar">
+                        </a>
+                    </div>
+                    <h5 class="title mt--30">A Digital Strategist with a Creative Edge</h5>
+                    <p class="disc">I blend technical expertise with design thinking to craft solutions that are visually compelling and performance-focused.</p>
+                    <div class="short-contact-area">
+                        <div class="single-contact">
+                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                            <div class="information tmp-link-animation">
+                                <span>Whatsapp</span>
+                                <a href="https://wa.me/27774204639" class="number" target="_blank" rel="noopener noreferrer">+27 77 420 4639</a>
+                            </div>
+                        </div>
+                        <div class="single-contact">
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                            <div class="information tmp-link-animation">
+                                <span>Email</span>
+                                <a href="mailto:connect@azungu.co.za" class="number">connect@azungu.co.za</a>
+                            </div>
+                        </div>
+                        <div class="single-contact">
+                            <i class="fa-solid fa-location-crosshairs" aria-hidden="true"></i>
+                            <div class="information tmp-link-animation">
+                                <span>Location</span>
+                                <span class="number">Johannesburg, Gauteng, South Africa</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-wrapper mt--20">
+                        <span class="subtitle">Find Me On</span>
+                        <div class="social-link">
+                            <a href="https://www.instagram.com/aszungu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                            <a href="https://www.linkedin.com/in/aszungu" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="overlay_close_side_menu close_side_menu_active" href="javascript:void(0);"></a>
+    </div>
+
+    <div class="d-block d-xl-none">
+        <div class="tmp-popup-mobile-menu">
+            <div class="inner">
+                <div class="header-top">
+                    <div class="logo">
+                        <a href="/" class="logo-area">
+                            <img class="logo-dark" src="assets/images/logo/white-logo-reeni.png" alt="Akhona Zungu Dark Logo">
+                            <img class="logo-white" src="assets/images/logo/logo-white.png" alt="Akhona Zungu White Logo">
+                        </a>
+                    </div>
+                    <div class="close-menu">
+                        <button class="close-button tmp-round-action-btn">
+                            <i class="fa-sharp fa-light fa-xmark" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <ul class="tmp-mainmenu">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="#">Client Portal
+                            <i class="fa-regular fa-chevron-down" aria-hidden="true"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="#" class="openServicesModal">Request Services</a></li>
+                            <li><a href="log-in.html">Log In</a></li>
+                            <li><a href="help.html">Help</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="Projects.html">Projects</a>
+                    </li>
+                    <li>
+                        <a href="/contact">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="social-wrapper mt--40">
+                    <span class="subtitle">Find Me On</span>
+                    <div class="social-link">
+                        <a href="https://www.instagram.com/aszungu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/aszungu" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <slot />
+    </main>
+
+    <footer class="footer-area footer-style-one-wrapper  tmp-section-gap">
+        <div class="container">
+            <div class="footer-main footer-style-one">
+                <div class="row g-5">
+                    <div class="col-lg-5 col-md-6">
+                        <div class="single-footer-wrapper border-right mr--20">
+                            <div class="logo">
+                                <a href="/">
+                                    <img src="assets/images/logo/white-logo-reeni.png" alt="Akhona Zungu Footer Logo">
+                                </a>
+                            </div>
+                            <p class="description"><span>Get Ready</span> For <br>Great Creations</p>
+                            <form action="#" class="newsletter-form-1 mt--40">
+                                <input type="email" placeholder="Email Address">
+                                <span class="form-icon"><i class="fa-regular fa-envelope" aria-hidden="true"></i></span>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-footer-wrapper quick-link-wrap">
+                            <h5 class="ft-title">Quick Link</h5>
+                            <ul class="ft-link tmp-link-animation">
+                                <li><a href="#" class="openServicesModal">Request Services</a></li>
+                                <li><a href="log-in.html">Log In</a></li>
+                                <li><a href="Projects.html">Projects</a></li>
+                                <li><a href="/contact">Contact</a></li>
+                                <li><a href="help.html">Help</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-footer-wrapper contact-wrap">
+                            <h5 class="ft-title">Contact </h5>
+                            <ul class="ft-link tmp-link-animation">
+                                <li><span class="ft-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span><a href="mailto:connect@azungu.co.za">connect@azungu.co.za</a></li>
+                                <li><span class="ft-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>Johannesburg, Gauteng, South Africa</li>
+                                <li><span class="ft-icon"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></span><a href="https://wa.me/27774204639" target="_blank" rel="noopener noreferrer">+27 77 420 4639</a></li>
+                            </ul>
+                            <div class="social-link footer">
+                                <a href="https://www.instagram.com/aszungu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                                <a href="https://www.linkedin.com/in/aszungu/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bg-img">
+            <img src="assets/images/footer/footer-bg-img.png" alt="" aria-hidden="true">
+        </div>
+    </footer>
+    <!-- 1. COPYRIGHT AREA -->
+    <div class="copyright-area-one">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main-wrapper">
+                        <!-- Notice the new Astro way to get the year! -->
+                        <p class="copy-right-para">© UMeet {new Date().getFullYear()} | All Rights Reserved</p>
+                        <ul>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="/contact">Reach Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. SCROLL TO TOP -->
+    <div class="scrollToTop" style="display: block;">
+        <div class="arrowUp">
+            <i class="fa-light fa-arrow-up" aria-hidden="true"></i>
+        </div>
+        <div class="water" style="transform: translate(0px, 87%);">
+            <svg viewBox="0 0 560 20" class="water_wave water_wave_back" aria-hidden="true">
+                <use xlink:href="#wave"></use>
+            </svg>
+            <svg viewBox="0 0 560 20" class="water_wave water_wave_front" aria-hidden="true">
+                <use xlink:href="#wave"></use>
+            </svg>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 560 20" style="display: none;" aria-hidden="true">
+                <symbol id="wave">
+                    <path d="M420,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C514,6.5,518,4.7,528.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H420z" fill="#FF8C33"></path>
+                    <path d="M420,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C326,6.5,322,4.7,311.5,2.7C304.3,1.4,293.6-0.1,280,0c0,0,0,0,0,0v20H420z" fill="#FF8C33"></path>
+                    <path d="M140,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C234,6.5,238,4.7,248.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H140z" fill="#FF8C33"></path>
+                    <path d="M140,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C46,6.5,42,4.7,31.5,2.7C24.3,1.4,13.6-0.1,0,0c0,0,0,0,0,0l0,20H140z" fill="#FF8C33"></path>
+                </symbol>
+            </svg>
+        </div>
+    </div>
+    
+<!-- Request Services Modal -->
+    <div id="servicesModal" class="portfolio-modal-overlay">
+        <div class="portfolio-modal-glass tmponhover">
+            <span class="portfolio-modal-close" id="closeServicesModal">&times;</span>
+            <h3 class="modal-title">Request My Services</h3>
+            <p class="modal-subtitle">Fill in your details and let's discuss your project.</p>
+            
+            <form id="servicesForm" class="portfolio-form">
+                <div class="form-group">
+                    <label for="servName">Name <span class="required">*</span></label>
+                    <input type="text" id="servName" name="servName" required placeholder="John Doe">
+                </div>
+                
+                <div class="form-group">
+                    <label for="servCompany">Company</label>
+                    <input type="text" id="servCompany" name="servCompany" placeholder="Your Company Ltd.">
+                </div>
+                
+                <div class="form-group">
+                    <label for="servEmail">Email Address <span class="required">*</span></label>
+                    <input type="email" id="servEmail" name="servEmail" required placeholder="john@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="servProject">Project Details</label>
+                    <input type="text" id="servProject" name="servProject" placeholder="E.g., Web Development, SEO...">
+                </div>
+                
+                <button type="submit" class="tmp-btn hover-icon-reverse radius-round w-100">
+                    <span class="icon-reverse-wrapper">
+                        <span class="btn-text">Submit Request</span>
+                        <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                        <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                    </span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script is:inline src="assets/js/vendor/jquery.js"></script>
+    <script is:inline src="assets/js/vendor/jquery-ui.min.js"></script>
+    <script is:inline src="assets/js/vendor/waypoints.min.js"></script>
+    <script is:inline src="assets/js/plugins/odometer.js"></script>
+    <script is:inline src="assets/js/vendor/appear.js"></script>
+    <script is:inline src="assets/js/vendor/jquery-one-page-nav.js"></script>
+    <script is:inline src="assets/js/plugins/swiper.js"></script>
+    <script is:inline src="assets/js/plugins/gsap.js"></script>
+    <script is:inline src="assets/js/plugins/splittext.js"></script>
+    <script is:inline src="assets/js/plugins/scrolltigger.js"></script>
+    <script is:inline src="assets/js/plugins/scrolltoplugins.js"></script>
+    <script is:inline src="assets/js/plugins/smoothscroll.js"></script>
+    <script is:inline src="assets/js/vendor/bootstrap.min.js"></script>
+    <script is:inline src="assets/js/vendor/waw.js"></script>
+    <script is:inline src="assets/js/plugins/isotop.js"></script>
+    <script is:inline src="assets/js/plugins/animation.js"></script>
+    <script is:inline src="assets/js/plugins/contact.form.js"></script>
+    <script is:inline src="assets/js/vendor/backtop.js"></script>
+    <script is:inline src="assets/js/plugins/text-type.js"></script>
+    <script is:inline src="assets/js/main.js"></script>
+
+    <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
+
+<script is:inline>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- 1. Portfolio Modal Logic (From index.astro) ---
+            const portfolioModal = document.getElementById("portfolioModal");
+            const openPortfolioBtn = document.getElementById("openPortfolioModal");
+            const closePortfolioBtn = document.getElementById("closePortfolioModal");
+
+            if (openPortfolioBtn) {
+                openPortfolioBtn.addEventListener('click', (e) => { 
+                    e.preventDefault(); 
+                    portfolioModal.classList.add("show"); 
+                });
+            }
+            if (closePortfolioBtn) {
+                closePortfolioBtn.addEventListener('click', () => portfolioModal.classList.remove("show"));
+            }
+
+            // --- 2. Services Modal Logic (Global Navbar) ---
+            const servicesModal = document.getElementById("servicesModal");
+            const openServicesBtns = document.querySelectorAll(".openServicesModal");
+            const closeServicesBtn = document.getElementById("closeServicesModal");
+
+            if (openServicesBtns.length > 0) {
+                openServicesBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => { 
+                        e.preventDefault(); 
+                        servicesModal.classList.add("show"); 
+                    });
+                });
+            }
+            if (closeServicesBtn) {
+                closeServicesBtn.addEventListener('click', () => servicesModal.classList.remove("show"));
+            }
+
+            // --- 3. Close Modals on Outside Click ---
+            window.addEventListener('click', (event) => { 
+                if (event.target === portfolioModal) portfolioModal.classList.remove("show"); 
+                if (event.target === servicesModal) servicesModal.classList.remove("show"); 
+            });
+        });
+    </script>
+</body>
+</html>
