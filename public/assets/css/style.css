@@ -5990,6 +5990,7 @@ input[type=submit]:hover {
 }
 
 /* Container for each radio item */
+/* Container for each radio item */
 .radio-item {
   display: flex;
   align-items: center;
@@ -6000,19 +6001,44 @@ input[type=submit]:hover {
 .radio-item label {
   margin-bottom: 0;
   font-weight: normal;
+  color: white !important;
+  font-weight: 1000 !important;;
   cursor: pointer;
+  line-height: 1; /* Helps perfectly align the text vertically with the dot */
 }
 
-/* Override the global .form-group input styles for the radio buttons */
+/* 1. Strip native styling and create the white outer circle */
 .form-group input[type="radio"].white-radio {
+  -webkit-appearance: none;
+  appearance: none;
   width: 18px;
   height: 18px;
   padding: 0;
   margin: 0 10px 0 0;
-  background-color: #ffffff; /* White background */
-  accent-color: #ffffff; /* Makes the checked inside state white (supported in modern browsers) */
-  border: 1px solid #ffffff; 
+  border-radius: 50%; /* Overrides the 5px border-radius */
+  border: 2px solid #ffffff !important;; /* White outer ring */
+  background-color: transparent;
   cursor: pointer;
+  
+  /* Use grid to perfectly center the inner dot */
+  display: grid;
+  place-content: center;
+}
+
+/* 2. Create the inner white dot (hidden by default) */
+.form-group input[type="radio"].white-radio::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ffffff !important; /* Inner dot color */
+  transform: scale(0);
+  transition: transform 120ms ease-in-out;
+}
+
+/* 3. Scale up the inner dot when selected */
+.form-group input[type="radio"].white-radio:checked::before {
+  transform: scale(1);
 }
 
 /*==============================
