@@ -54,8 +54,8 @@
                                         <i class="fa-regular fa-chevron-down"></i>
                                     </a>
                                     <ul class="submenu">
-                                        <li><a href="#" class="openServicesModal">Request Services</a></li>
-                                        <li><a href="log-in.html">Log In</a></li>
+                                        <li><a href="#" class="openServicesModal">Request My Services</a></li>
+                                        <li><a href="#" class="openLoginModal">Log In</a></li>
                                         <li><a href="help.html">Help</a></li>
                                     </ul>
                                 </li>
@@ -172,8 +172,8 @@
                             <i class="fa-regular fa-chevron-down" aria-hidden="true"></i>
                         </a>
                         <ul class="submenu">
-                            <li><a href="#" class="openServicesModal">Request Services</a></li>
-                            <li><a href="log-in.html">Log In</a></li>
+                            <li><a href="#" class="openServicesModal">Request My Services</a></li>
+                            <li><a href="#" class="openLoginModal">Log In</a></li>
                             <li><a href="help.html">Help</a></li>
                         </ul>
                     </li>
@@ -222,8 +222,8 @@
                         <div class="single-footer-wrapper quick-link-wrap">
                             <h5 class="ft-title">Quick Link</h5>
                             <ul class="ft-link tmp-link-animation">
-                                <li><a href="#" class="openServicesModal">Request Services</a></li>
-                                <li><a href="log-in.html">Log In</a></li>
+                                <li><a href="#" class="openServicesModal">Request My Services</a></li>
+                                <li><a href="#" class="openLoginModal">Log In</a></li>
                                 <li><a href="/comingsoon">Projects</a></li>
                                 <li><a href="/contact">Contact</a></li>
                                 <li><a href="help.html">Help</a></li>
@@ -293,37 +293,78 @@
         </div>
     </div>
     
-<!-- Request Services Modal -->
+<!-- Modals -->
     <div id="servicesModal" class="portfolio-modal-overlay">
-        <div class="portfolio-modal-glass tmponhover">
-            <span class="portfolio-modal-close" id="closeServicesModal">&times;</span>
-            <h3 class="modal-title">Request My Services</h3>
-            <p class="modal-subtitle">Fill in your details and let's discuss your project.</p>
-            
-            <form id="servicesForm" class="portfolio-form">
-                <div class="form-group">
-                    <label for="servName">Name <span class="required">*</span></label>
-                    <input type="text" id="servName" name="servName" required placeholder="John Doe">
-                </div>
+            <div class="portfolio-modal-glass tmponhover">
+                <span class="portfolio-modal-close" id="closeServicesModal">&times;</span>
+                <h3 class="modal-title">Request My Services</h3>
+                <p class="modal-subtitle">Fill in your details and let's discuss your project.</p>
                 
-                <div class="form-group">
-                    <label for="servCompany">Company</label>
-                    <input type="text" id="servCompany" name="servCompany" placeholder="Your Company Ltd.">
-                </div>
-                
-                <div class="form-group">
-                    <label for="servEmail">Email Address <span class="required">*</span></label>
-                    <input type="email" id="servEmail" name="servEmail" required placeholder="john@example.com">
-                </div>
+                <form id="servicesForm" class="portfolio-form">
+                    <div class="form-group">
+                        <label for="servName">Name <span class="required">*</span></label>
+                        <input type="text" id="servName" name="servName" required placeholder="John Doe">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="servCompany">Company</label>
+                        <input type="text" id="servCompany" name="servCompany" placeholder="Your Company Ltd.">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="servEmail">Email Address <span class="required">*</span></label>
+                        <input type="email" id="servEmail" name="servEmail" required placeholder="john@example.com">
+                    </div>
 
+                    <div class="form-group">
+                        <label>Services required <span class="required">*</span></label>
+                        <div class="radio-wrapper" style="margin-top: 10px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <input type="radio" id="servGraphic" name="servRequired" value="Graphic design" required style="width: auto; margin-right: 10px; margin-bottom: 0;">
+                                <label for="servGraphic" style="margin-bottom: 0; cursor: pointer; font-weight: normal;">Graphic design</label>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <input type="radio" id="servWeb" name="servRequired" value="Web development" required style="width: auto; margin-right: 10px; margin-bottom: 0;">
+                                <label for="servWeb" style="margin-bottom: 0; cursor: pointer; font-weight: normal;">Web development</label>
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <input type="radio" id="servSocial" name="servRequired" value="Social media management" required style="width: auto; margin-right: 10px; margin-bottom: 0;">
+                                <label for="servSocial" style="margin-bottom: 0; cursor: pointer; font-weight: normal;">Social media management</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="tmp-btn hover-icon-reverse radius-round w-100">
+                        <span class="icon-reverse-wrapper">
+                            <span class="btn-text">Next</span>
+                            <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                            <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
+                        </span>
+                    </button>
+                </form>
+            </div>
+    </div>
+
+    <div id="loginModal" class="portfolio-modal-overlay">
+        <div class="portfolio-modal-glass tmponhover">
+            <span class="portfolio-modal-close" id="closeLoginModal">&times;</span>
+            <h3 class="modal-title">Log In</h3>
+            <p class="modal-subtitle">Fill in your details to see your projects.</p>
+            
+            <form id="loginForm" class="portfolio-form">
                 <div class="form-group">
-                    <label for="servProject">Project Details</label>
-                    <input type="text" id="servProject" name="servProject" placeholder="E.g., Web Development, SEO...">
+                    <label for="lognName"> Project ID <span class="required">*</span></label>
+                    <input type="text" id="lognProject" name="lognProject" required placeholder="Your Project ID">
                 </div>
                 
+                <div class="form-group">
+                    <label for="lognOTP">OTP <span class="required">*</span></label>
+                    <input type="text" id="lognOTP" name="lognOTP" required placeholder="The OTP You Received Via Email/Whatsapp">
+                </div>
+                <p class="modal-subtitle">Request OTP</p>
                 <button type="submit" class="tmp-btn hover-icon-reverse radius-round w-100">
                     <span class="icon-reverse-wrapper">
-                        <span class="btn-text">Submit Request</span>
+                        <span class="btn-text">Submit</span>
                         <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
                         <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
                     </span>
@@ -357,44 +398,62 @@
 
 <script is:inline>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- 1. Portfolio Modal Logic (From index.astro) ---
-            const portfolioModal = document.getElementById("portfolioModal");
-            const openPortfolioBtn = document.getElementById("openPortfolioModal");
-            const closePortfolioBtn = document.getElementById("closePortfolioModal");
+    // --- 1. Portfolio Modal Logic (From index.astro) ---
+    const portfolioModal = document.getElementById("portfolioModal");
+    const openPortfolioBtn = document.getElementById("openPortfolioModal");
+    const closePortfolioBtn = document.getElementById("closePortfolioModal");
 
-            if (openPortfolioBtn) {
-                openPortfolioBtn.addEventListener('click', (e) => { 
-                    e.preventDefault(); 
-                    portfolioModal.classList.add("show"); 
-                });
-            }
-            if (closePortfolioBtn) {
-                closePortfolioBtn.addEventListener('click', () => portfolioModal.classList.remove("show"));
-            }
+    if (openPortfolioBtn) {
+        openPortfolioBtn.addEventListener('click', (e) => { 
+            e.preventDefault(); 
+            portfolioModal.classList.add("show"); 
+        });
+    }
+    if (closePortfolioBtn) {
+        closePortfolioBtn.addEventListener('click', () => portfolioModal.classList.remove("show"));
+    }
 
-            // --- 2. Services Modal Logic (Global Navbar) ---
-            const servicesModal = document.getElementById("servicesModal");
-            const openServicesBtns = document.querySelectorAll(".openServicesModal");
-            const closeServicesBtn = document.getElementById("closeServicesModal");
+    // --- 2. Services Modal Logic ---
+    const servicesModal = document.getElementById("servicesModal");
+    const openServicesBtns = document.querySelectorAll(".openServicesModal");
+    const closeServicesBtn = document.getElementById("closeServicesModal");
 
-            if (openServicesBtns.length > 0) {
-                openServicesBtns.forEach(btn => {
-                    btn.addEventListener('click', (e) => { 
-                        e.preventDefault(); 
-                        servicesModal.classList.add("show"); 
-                    });
-                });
-            }
-            if (closeServicesBtn) {
-                closeServicesBtn.addEventListener('click', () => servicesModal.classList.remove("show"));
-            }
-
-            // --- 3. Close Modals on Outside Click ---
-            window.addEventListener('click', (event) => { 
-                if (event.target === portfolioModal) portfolioModal.classList.remove("show"); 
-                if (event.target === servicesModal) servicesModal.classList.remove("show"); 
+    if (openServicesBtns.length > 0) {
+        openServicesBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => { 
+                e.preventDefault(); 
+                servicesModal.classList.add("show"); 
             });
         });
+    }
+    if (closeServicesBtn) {
+        closeServicesBtn.addEventListener('click', () => servicesModal.classList.remove("show"));
+    }
+
+    // --- 3. Login Modal Logic (Global Navbar) ---
+    const loginModal = document.getElementById("loginModal");
+    const openLoginBtns = document.querySelectorAll(".openLoginModal");
+    const closeLoginBtn = document.getElementById("closeLoginModal");
+
+    if (openLoginBtns.length > 0) {
+        openLoginBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => { 
+                e.preventDefault(); 
+                loginModal.classList.add("show"); 
+            });
+        });
+    }
+    if (closeLoginBtn) {
+        closeLoginBtn.addEventListener('click', () => loginModal.classList.remove("show"));
+    }
+
+    // --- 4. Close Modals on Outside Click ---
+    window.addEventListener('click', (event) => { 
+        if (event.target === portfolioModal) portfolioModal.classList.remove("show"); 
+        if (event.target === loginModal) loginModal.classList.remove("show"); 
+        if (event.target === servicesModal) servicesModal.classList.remove("show"); 
+    });
+});
     </script>
 </body>
 </html>
