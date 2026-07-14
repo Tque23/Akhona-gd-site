@@ -5989,6 +5989,32 @@ input[type=submit]:hover {
   transform: translateY(-5px);
 }
 
+/* Container for each radio item */
+.radio-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Reset the label margin specifically for radio options */
+.radio-item label {
+  margin-bottom: 0;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+/* Override the global .form-group input styles for the radio buttons */
+.form-group input[type="radio"].white-radio {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 0 10px 0 0;
+  background-color: #ffffff; /* White background */
+  accent-color: #ffffff; /* Makes the checked inside state white (supported in modern browsers) */
+  border: 1px solid #ffffff; 
+  cursor: pointer;
+}
+
 /*==============================
  *  Utilities
 =================================*/
