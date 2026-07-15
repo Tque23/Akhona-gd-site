@@ -490,14 +490,28 @@ import Layout from '../layouts/Layout.astro';
         const canvas = document.getElementById('wave-canvas') as HTMLCanvasElement;
         
         if (canvas) {
+            // THE FIX: Move the canvas directly to the body so it escapes any CSS transforms from parent wrappers
+            document.body.insertBefore(canvas, document.body.firstChild);
+            
             const ctx = canvas.getContext('2d');
             let width: number, height: number;
             let time = 0;
 
-            // Fit canvas to the full browser window
+            // Fit canvas to the full browser window while accounting for high-DPI screens
             const resize = () => {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
+                width = window.innerWidth;
+                height = window.innerHeight;
+                
+                const dpr = window.devicePixelRatio || 1;
+
+                canvas.width = width * dpr;
+                canvas.height = height * dpr;
+                canvas.style.width = `${width}px`;
+                canvas.style.height = `${height}px`;
+
+                if (ctx) {
+                    ctx.scale(dpr, dpr);
+                }
             };
             
             window.addEventListener('resize', resize);
