@@ -14796,7 +14796,8 @@ Section Head
   letter-spacing: 1px;
   text-transform: uppercase;
 }
-.section-head .subtitle.color-gradiant {
+
+.section-head .subtitle.color-gradient { 
   background: var(--text-gradient-one);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
