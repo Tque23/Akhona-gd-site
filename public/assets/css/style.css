@@ -145,6 +145,24 @@
   box-sizing: border-box;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. Give your body some breathing room */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* 3. Fix for any UI framework wrappers (React/Vue/Svelte) */
+astro-island, astro-slot {
+  display: block;
+  width: 100%;
+}
+
 html {
   margin: 0;
   padding: 0;
