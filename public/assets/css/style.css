@@ -56,8 +56,8 @@
 52.footers';
 ----------------------------*/
 /*----Default Css----*/
-@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 :root {
   --color-primary: #FF6600;       /* Main vibrant orange */
   --color-primary-alt: #FF8C33;   /* Lighter, for hover or highlights */
@@ -92,7 +92,6 @@
   --color-lighter: #CED0D4;
   --color-lightest: #F0F2F5;
   --color-border: #ffffff14;
-  --color-white: #ffffff;
   --color-white-75: rgba(255, 255, 255, 0.75);
   --color-success: #3EB75E;
   --color-danger: #FF0003;
@@ -782,7 +781,6 @@ input[type=search] {
   -webkit-appearance: textfield;
   -moz-appearance: textfield;
   appearance: textfield;
-  appearance: textfield;
   padding-right: 2px;
   width: 270px;
 }
@@ -879,7 +877,6 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
   content: none;
 }
 
@@ -13725,7 +13722,7 @@ header.header-full-width.header--sticky.sticky {
     transform: translateY(0);
   }
 }
-@keyframes up-dow-2 {
+@keyframes up-down-2 {
   0% {
     transform: translateY(-10px);
   }
@@ -14586,7 +14583,7 @@ header.header-full-width.header--sticky.sticky {
 .box-body {
   margin: 25px;
   background: #ee0979;
-  background: -webkit-linear-gradient(to right, #ff6a00, #ee0979);
+  background: -webkit-linear-gradient(right, #ff6a00, #ee0979);
   background: var(--gradient-box) !important;
   position: relative;
 }
@@ -15858,7 +15855,6 @@ Section Head
   }
 }
 .signle-side-bar:last-child {
-  margin-bottom: 0;
   margin-bottom: 0;
   position: sticky;
   top: 120px;
@@ -17249,7 +17245,6 @@ section.clients-testimonial-area {
 }
 .tmp-banner-one-area.style-4 {
   min-height: 900px;
-  background-image: url(../images/banner/banner-background-04.jpg);
   position: relative;
   background-image: none;
 }
@@ -18656,7 +18651,7 @@ section.clients-testimonial-area {
     transform: translateY(0);
   }
 }
-@keyframes up-dow-2 {
+@keyframes up-down-2 {
   0% {
     transform: translateY(-10px);
   }
@@ -20257,7 +20252,6 @@ section.clients-testimonial-area {
   border: 0px solid var(--color-primary);
   box-shadow: none;
   border-radius: 50% !important;
-  border-radius: 5px;
   font-weight: 300;
 }
 
@@ -20437,7 +20431,7 @@ body.loaded {
   -ms-flex-pack: center;
   justify-content: center;
   background: transparent;
-  z-index: 99999999999999;
+  z-index: 2147483647;
 }
 
 .loader-wrap svg {
