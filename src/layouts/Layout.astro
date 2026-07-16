@@ -600,7 +600,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
         }
 
         window.renderDashboard = function() {
-            let dashboardHTML = `<h3>Your Projects</h3>`;
+            let dashboardHTML = `<h3>Your Projects</h3> <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 20px 0;">`;
             
             // Use .map and .join to insert the HR line between items
             dashboardHTML += clientProjects.map((project, index) => {
