@@ -456,11 +456,11 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             <span class="portfolio-modal-close" id="closeSuccessPopupIcon">&times;</span>
             
             <div style="font-size: 50px; color: #FF8C33; margin-bottom: 20px;">
-                <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle-xmark" aria-hidden="true"></i>
             </div>
             
-            <h3 class="modal-title" style="margin-bottom: 15px;">Thank You!</h3>
-            <p class="modal-subtitle" style="font-size: 16px; margin-bottom: 30px;">Thanks for reaching out! We've received your project details and will get back to you within the next 24 hours.</p>
+            <h3 class="modal-title" style="margin-bottom: 15px;">That Did Not Work</h3>
+            <p class="modal-subtitle" style="font-size: 16px; margin-bottom: 30px;">Unfortunately, we’ve stumbled upon an issue processing your request. Please send us a WhatsApp on 077 420 4639 or email connect@azungu.co.za, and we’ll assist you as soon as possible.</p>
             
             <button type="button" id="closeSuccessBtn" class="tmp-btn hover-icon-reverse radius-round w-100">
                 <span class="icon-reverse-wrapper">
@@ -529,21 +529,140 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             closeServicesBtn.addEventListener('click', () => servicesModal.classList.remove("show"));
         }
 
-        // --- 3. Login Modal Logic (Global Navbar) ---
+        // --- 3. Login & Portal Logic ---
         const loginModal = document.getElementById("loginModal");
         const openLoginBtns = document.querySelectorAll(".openLoginModal");
         const closeLoginBtn = document.getElementById("closeLoginModal");
+        const loginForm = document.getElementById("loginForm");
+        const modalScrollWrapper = loginModal.querySelector(".modal-scroll-wrapper");
+
+        // Save original modal HTML so we can restore it on close
+        const originalLoginHTML = modalScrollWrapper.innerHTML; 
+
+        // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
+        const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbzeIjVRVcpbVXvN5W727QMvOCDC9bkDDxX7WkX86oU1MksDSNh7_xAO7Rhy7fiTi4TdZg/exec";
+
+        // Store the client's projects in memory after login
+        let clientProjects = [];
 
         if (openLoginBtns.length > 0) {
             openLoginBtns.forEach(btn => {
                 btn.addEventListener('click', (e) => { 
                     e.preventDefault(); 
+                    modalScrollWrapper.innerHTML = originalLoginHTML; // Reset to login view
+                    attachLoginFormListener(); // Re-attach listener to the fresh form
                     loginModal.classList.add("show"); 
                 });
             });
         }
+
         if (closeLoginBtn) {
-            closeLoginBtn.addEventListener('click', () => loginModal.classList.remove("show"));
+            closeLoginBtn.addEventListener('click', () => {
+                loginModal.classList.remove("show");
+            });
+        }
+
+        function attachLoginFormListener() {
+            const form = document.getElementById("loginForm");
+            const submitBtnText = form.querySelector(".btn-text");
+            
+            if(!form) return;
+
+            form.addEventListener("submit", async function(e) {
+                e.preventDefault();
+                
+                const user = document.getElementById("lognProject").value;
+                const otp = document.getElementById("lognOTP").value;
+                
+                submitBtnText.innerText = "Authenticating...";
+
+                try {
+                    const response = await fetch(GOOGLE_API_URL, {
+                        method: "POST",
+                        body: JSON.stringify({ user, otp }),
+                        headers: { "Content-Type": "text/plain;charset=utf-8" } // Bypass preflight issues
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        clientProjects = data.projects;
+                        renderDashboard();
+                    } else {
+                        alert(data.message);
+                        submitBtnText.innerText = "Submit";
+                    }
+                } catch (error) {
+                    alert("Connection error. Please try again.");
+                    submitBtnText.innerText = "Submit";
+                }
+            });
+        }
+
+        function renderDashboard() {
+            let dashboardHTML = `
+                <h3 class="modal-title">Your Portal</h3>
+                <p class="modal-subtitle">Select a project to view files and details.</p>
+                <div class="portal-dashboard-grid">
+            `;
+
+            clientProjects.forEach((project, index) => {
+                dashboardHTML += `
+                    <div class="portal-project-card" onclick="renderProjectView(${index})">
+                        <div class="portal-project-info">
+                            <h4>${project.projectName}</h4>
+                            <span class="portal-tag">${project.projectType}</span>
+                            <p class="portal-date"><i class="fa-regular fa-calendar"></i> ${project.projectDate}</p>
+                        </div>
+                        <div class="portal-project-arrow">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                `;
+            });
+
+            dashboardHTML += `</div>`;
+            modalScrollWrapper.innerHTML = dashboardHTML;
+        }
+
+        // Make the function available globally so inline onclick events can reach it
+        window.renderProjectView = function(index) {
+            const project = clientProjects[index];
+            const isPaid = project.paid === 'TRUE';
+            
+            // Grey out logic
+            const btnClass = isPaid ? "tmp-btn hover-icon-reverse radius-round w-100" : "tmp-btn w-100 disabled-btn";
+            const btnText = isPaid ? "Download Files" : "Payment Pending";
+            const disabledAttr = isPaid ? "" : "disabled";
+            const downloadHref = isPaid ? `href="${project.downloadLink}" target="_blank"` : `href="#"`;
+
+            const projectHTML = `
+                <button class="portal-back-btn" onclick="renderDashboard()">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+                </button>
+                
+                <h3 class="modal-title" style="margin-top:15px;">${project.projectName}</h3>
+                <span class="portal-tag mb--20" style="display:inline-block;">${project.projectType}</span>
+                
+                ${project.image ? `
+                    <div class="portal-preview-img mb--30">
+                        <img src="${project.image}" alt="${project.projectName} Preview">
+                    </div>
+                ` : ''}
+                
+                <div style="margin-top: auto;">
+                    <a ${downloadHref} class="${btnClass}" ${disabledAttr} style="text-align:center; display:flex; justify-content:center; align-items:center;">
+                        <span class="icon-reverse-wrapper">
+                            <span class="btn-text">${btnText}</span>
+                            ${isPaid ? `<span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-down" aria-hidden="true"></i></span>
+                            <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-down" aria-hidden="true"></i></span>` : ''}
+                        </span>
+                    </a>
+                    ${!isPaid ? `<p class="modal-subtitle" style="text-align:center; margin-top:15px; color:#f80707;">Downloads are unlocked once the final invoice is settled.</p>` : ''}
+                </div>
+            `;
+
+            modalScrollWrapper.innerHTML = projectHTML;
         }
 
         // --- 4. Close Modals on Outside Click ---

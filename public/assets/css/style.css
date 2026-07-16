@@ -27060,3 +27060,107 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
       width: 100%;
     }
   }
+
+  /* --- Client Portal Dashboard Styles --- */
+
+.portal-dashboard-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.portal-project-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.portal-project-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #FF8C33; /* Matches your theme accent */
+    transform: translateY(-2px);
+}
+
+.portal-project-info h4 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.portal-tag {
+    background: rgba(255, 140, 51, 0.15);
+    color: #FF8C33;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.portal-date {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.portal-project-arrow i {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.portal-project-card:hover .portal-project-arrow i {
+    color: #FF8C33;
+    transform: translateX(3px);
+}
+
+/* --- Project Details View Styles --- */
+
+.portal-back-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.portal-back-btn:hover {
+    color: #fff;
+}
+
+.portal-preview-img {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.portal-preview-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 250px;
+}
+
+/* --- Disabled Download Button --- */
+.disabled-btn {
+    background: #2a2a2a !important;
+    color: #666 !important;
+    border: 1px solid #444 !important;
+    cursor: not-allowed;
+    pointer-events: none;
+}
