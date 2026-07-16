@@ -599,7 +599,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             });
         }
 
-        function renderDashboard() {
+        window.renderDashboard = function() {
             let dashboardHTML = `
                 <h3 class="modal-title">Your Portal</h3>
                 <p class="modal-subtitle">Select a project to view files and details.</p>
@@ -637,18 +637,20 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             const downloadHref = isPaid ? `href="${project.downloadLink}" target="_blank"` : `href="#"`;
 
             const projectHTML = `
-                <button class="portal-back-btn" onclick="renderDashboard()">
+                <button class="portal-back-btn" onclick="window.renderDashboard()">
                     <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
                 </button>
                 
-                <h3 class="modal-title" style="margin-top:15px;">${project.projectName}</h3>
+                <h3 class="modal-title" style="margin-top:20px;">${project.projectName}</h3>
                 <span class="portal-tag mb--20" style="display:inline-block;">${project.projectType}</span>
                 
                 ${project.image ? `
-                    <div class="portal-preview-img mb--30">
+                    <div class="portal-preview-img mb--20">
                         <img src="${project.image}" alt="${project.projectName} Preview">
                     </div>
                 ` : ''}
+                
+                <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 25px 0;">
                 
                 <div style="margin-top: auto;">
                     <a ${downloadHref} class="${btnClass}" ${disabledAttr} style="text-align:center; display:flex; justify-content:center; align-items:center;">
