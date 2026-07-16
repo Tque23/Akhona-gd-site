@@ -207,7 +207,6 @@ h6,
 address,
 p,
 pre,
-blockquote,
 menu,
 ol,
 ul,
@@ -458,7 +457,7 @@ table {
 table a,
 table a:link,
 table a:visited {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 cite,
@@ -475,15 +474,11 @@ var {
 /*---------------------------
 	List Style 
 ---------------------------*/
-ul,
-ol {
-  padding-left: 18px;
-}
 
 ul {
   list-style: square;
   margin-bottom: 30px;
-  padding-left: 20px;
+  padding-left: 0px;
 }
 ul.liststyle.bullet li {
   font-size: 18px;
@@ -518,7 +513,7 @@ ul li {
   color: var(--color-body);
 }
 ul li a {
-  text-decoration: none;
+  text-decoration: none !important;
   color: var(--color-gray);
 }
 ul li a:hover {
@@ -528,9 +523,6 @@ ul ul {
   margin-bottom: 0;
 }
 
-ol {
-  margin-bottom: 30px;
-}
 ol li {
   font-size: var(--font-size-b1);
   line-height: var(--line-height-b1);
@@ -540,7 +532,7 @@ ol li {
 }
 ol li a {
   color: var(--color-heading);
-  text-decoration: none;
+  text-decoration: none !important;
 }
 ol li a:hover {
   color: var(--color-primary);
@@ -590,14 +582,14 @@ audio:not([controls]) {
 
 a {
   color: var(--color-heading);
-  text-decoration: none;
+  text-decoration: none !important;
   outline: none;
 }
 
 a:hover,
 a:focus,
 a:active {
-  text-decoration: none;
+  text-decoration: none !important;
   outline: none;
 }
 
@@ -685,6 +677,7 @@ dd {
 dt {
   font-weight: bold;
   color: var(--color-heading);
+  margin-bottom: 10px;
 }
 
 menu,
@@ -824,7 +817,7 @@ del {
 
 ins {
   background: rgba(255, 47, 47, 0.4);
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 hr {
@@ -832,17 +825,6 @@ hr {
   border: 0;
   height: 1px;
   margin: 0 0 24px;
-}
-
-table a,
-table a:link,
-table a:visited {
-  text-decoration: underline;
-}
-
-dt {
-  font-weight: bold;
-  margin-bottom: 10px;
 }
 
 dd {
@@ -6809,7 +6791,7 @@ textarea:-ms-input-placeholder {
   bottom: 60px;
   text-align: center;
   z-index: 9811 !important;
-  text-decoration: none;
+  text-decoration: none !important;
   background: #fff;
   line-height: 80px;
   color: #757589;
@@ -14971,7 +14953,7 @@ Section Head
   border-radius: 6px;
   border: 0 none;
   outline: none;
-  text-decoration: none;
+  text-decoration: none !important;
   font-family: var(--font-secondary);
   text-transform: capitalize;
 }
@@ -24887,7 +24869,7 @@ Right Demo
   display: inline-block;
   padding: 15px 35px;
   list-style: none;
-  text-decoration: none;
+  text-decoration: none !important;
   color: #ffffff;
   outline: none;
   border: 2px solid rgba(255, 255, 255, 0.0784313725);
@@ -27027,7 +27009,7 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
 
   .social-links a {
     color: var(--text-secondary);
-    text-decoration: none;
+    text-decoration: none !important;
     font-size: 0.9rem;
     letter-spacing: 1px;
     transition: color 0.3s ease;
@@ -27176,4 +27158,8 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
     border: 1px solid #444 !important;
     cursor: not-allowed;
     pointer-events: none;
+}
+
+ul.ft-link.tmp-link-animation {
+  padding-left: 0 !important; 
 }
