@@ -587,7 +587,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                     
                     if (data.success) {
                         clientProjects = data.projects;
-                        renderDashboard();
+                        window.renderDashboard();
                     } else {
                         alert(data.message);
                         submitBtnText.innerText = "Submit";
@@ -600,28 +600,33 @@ import SpeedInsights from '@vercel/speed-insights/astro';
         }
 
         window.renderDashboard = function() {
-            let dashboardHTML = `
-                <h3 class="modal-title">Your Portal</h3>
-                <p class="modal-subtitle">Select a project to view files and details.</p>
-                <div class="portal-dashboard-grid">
-            `;
-
-            clientProjects.forEach((project, index) => {
-                dashboardHTML += `
-                    <div class="portal-project-card" onclick="renderProjectView(${index})">
+            let dashboardHTML = `<h3>Your Projects</h3>`;
+            
+            // Use .map and .join to insert the HR line between items
+            dashboardHTML += clientProjects.map((project, index) => {
+                const isPaid = project.paid === 'TRUE';
+                
+                // This is the HTML for the project card
+                let card = `
+                    <div class="portal-project-card" onclick="window.renderProjectView(${index})">
                         <div class="portal-project-info">
                             <h4>${project.projectName}</h4>
                             <span class="portal-tag">${project.projectType}</span>
-                            <p class="portal-date"><i class="fa-regular fa-calendar"></i> ${project.projectDate}</p>
                         </div>
                         <div class="portal-project-arrow">
                             <i class="fa-solid fa-chevron-right"></i>
                         </div>
                     </div>
                 `;
-            });
 
-            dashboardHTML += `</div>`;
+                // Only add the HR line if it's NOT the last project
+                if (index < clientProjects.length - 1) {
+                    card += `<hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 20px 0;">`;
+                }
+                
+                return card;
+            }).join('');
+
             modalScrollWrapper.innerHTML = dashboardHTML;
         }
 
