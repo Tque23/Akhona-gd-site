@@ -27111,10 +27111,22 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
     margin-bottom: 0;
 }
 
-.portal-project-arrow i {
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 18px;
-    transition: 0.3s;
+.portal-project-arrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.portal-view-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666; /* Adjust to match your design */
+    transition: color 0.2s ease;
+}
+
+.portal-project-card:hover .portal-view-text,
+.portal-project-card:hover .portal-project-arrow i {
+    color: var(--primary-color); /* Or your accent colour */
 }
 
 .portal-project-card:hover .portal-project-arrow i {
