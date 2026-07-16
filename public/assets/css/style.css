@@ -19949,6 +19949,15 @@ section.clients-testimonial-area {
   background: var(--color-gray-2);
   padding: 20px 30px;
 }
+
+.glass-panel-wrapper {
+  border-radius: 20px;
+  background: var(--color-gray-2);
+  padding: 20px 30px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 @media (min-width: 576px) {
   .get-in-touch-wrapper {
     padding: 80px 60px;
