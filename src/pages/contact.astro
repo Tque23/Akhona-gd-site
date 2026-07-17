@@ -81,7 +81,7 @@ import Layout from '../layouts/Layout.astro';
                                     <div class="contact-form">
                                         <div id="form-messages" class="error"></div>
                                         <form class="tmp-dynamic-form" id="contact-form" method="POST" action="/mailer.php">
-                                            <div class="contact-form-wrapper row">
+                                            <div class="contact-form-wrapper row g-3">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <input class="input-field" name="name" id="contact-name" placeholder="Your Name" type="text" required>
@@ -90,7 +90,7 @@ import Layout from '../layouts/Layout.astro';
 
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <input class="input-field" id="contact-phone" placeholder="Phone Number" type="number" required>
+                                                        <input class="input-field" id="contact-phone" name="phone" placeholder="Phone Number" type="tel" inputmode="tel" autocomplete="tel" required>
                                                     </div>
                                                 </div>
 

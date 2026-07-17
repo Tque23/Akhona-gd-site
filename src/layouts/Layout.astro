@@ -426,7 +426,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                 
                 <form id="loginForm" class="portfolio-form">
                     <div class="form-group">
-                        <label for="lognProject"> Email/WhatsApp Number <span class="required">*</span></label>
+                        <label for="lognProject">Email Address <span class="required">*</span></label>
                         <input type="text" id="lognProject" name="lognProject" required placeholder="eg. '0774204639' or 'connect@azungu.co.za'">
                     </div>
                     
@@ -434,10 +434,15 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                         <label for="lognOTP">Access Code <span class="required">*</span></label>
                         <input type="text" id="lognOTP" name="lognOTP" required placeholder="The Code You Received Via Email/Whatsapp">
                     </div>
-                    <div class="modal-subtitle tmp-link-animation">
-                                <a href="/404" class="number">Request Code</a>
+                    
+                    <!-- Updated Link Container -->
+                    <div class="modal-subtitle tmp-link-animation" style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+                        <a href="/404" class="number">Request Code</a>
+                        <a href="#" class="openServicesModal number">First Time Here? Sign up</a>
                     </div>
-                    <button type="submit" class="tmp-btn hover-icon-reverse radius-round w-100">
+                    
+                    <!-- Added a top margin to space the submit button from the links -->
+                    <button type="submit" class="tmp-btn hover-icon-reverse radius-round w-100" style="margin-top: 15px;">
                         <span class="icon-reverse-wrapper">
                             <span class="btn-text">Submit</span>
                             <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
@@ -453,12 +458,12 @@ import SpeedInsights from '@vercel/speed-insights/astro';
         <div class="portfolio-modal-glass tmponhover" style="text-align: center; padding: 40px 30px; max-width: 450px; margin: auto; height: auto;">
             <span class="portfolio-modal-close" id="closeSuccessPopupIcon">&times;</span>
             
-            <div style="font-size: 50px; color: #FF8C33; margin-bottom: 20px;">
-                <i class="fa-solid fa-circle-xmark" aria-hidden="true"></i>
+            <div id="popupIconContainer" style="font-size: 50px; color: #FF8C33; margin-bottom: 20px;">
+                <i id="popupIcon" class="fa-solid fa-circle-check" aria-hidden="true"></i>
             </div>
             
-            <h3 class="modal-title" style="margin-bottom: 15px;">That Did Not Work</h3>
-            <p class="modal-subtitle" style="font-size: 16px; margin-bottom: 30px;">Unfortunately, we’ve stumbled upon an issue processing your request. Please send us a WhatsApp on 077 420 4639 or email connect@azungu.co.za, and we’ll assist you as soon as possible.</p>
+            <h3 id="popupTitle" class="modal-title" style="margin-bottom: 15px;">Project Started!</h3>
+            <p id="popupText" class="modal-subtitle" style="font-size: 16px; margin-bottom: 30px;">Thank you! Your project details have been successfully submitted. We will review them and get back to you shortly.</p>
             
             <button type="button" id="closeSuccessBtn" class="tmp-btn hover-icon-reverse radius-round w-100">
                 <span class="icon-reverse-wrapper">
@@ -512,17 +517,29 @@ import SpeedInsights from '@vercel/speed-insights/astro';
 
         // --- 2. Services Modal Logic ---
         const servicesModal = document.getElementById("servicesModal");
-        const openServicesBtns = document.querySelectorAll(".openServicesModal");
         const closeServicesBtn = document.getElementById("closeServicesModal");
 
-        if (openServicesBtns.length > 0) {
-            openServicesBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => { 
-                    e.preventDefault(); 
-                    servicesModal.classList.add("show"); 
-                });
-            });
-        }
+        // Use event delegation so dynamic/recreated buttons still work
+        document.addEventListener('click', (e) => {
+            // Check if what was clicked (or its parent) has the class
+            const btn = e.target.closest('.openServicesModal');
+            
+            if (btn) {
+                e.preventDefault(); 
+                
+                // Close the login modal if it's currently open
+                const loginModalEl = document.getElementById("loginModal");
+                if (loginModalEl && loginModalEl.classList.contains("show")) {
+                    loginModalEl.classList.remove("show");
+                }
+                
+                // Open the services modal
+                if (servicesModal) {
+                    servicesModal.classList.add("show");
+                }
+            }
+        });
+
         if (closeServicesBtn) {
             closeServicesBtn.addEventListener('click', () => servicesModal.classList.remove("show"));
         }
@@ -538,10 +555,156 @@ import SpeedInsights from '@vercel/speed-insights/astro';
         const originalLoginHTML = modalScrollWrapper.innerHTML; 
 
         // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
-        const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbzeIjVRVcpbVXvN5W727QMvOCDC9bkDDxX7WkX86oU1MksDSNh7_xAO7Rhy7fiTi4TdZg/exec";
+        const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbyY6rn9n60hYEbLCs7U6htoCM4dWxNjVvZxuNt44GyE6JCduuHhipzl_Z4Oq6tMCgY40w/exec";
 
         // Store the client's projects in memory after login
         let clientProjects = [];
+        let activePreviewClose = null;
+
+        function openProjectPreview(source, description) {
+            if (activePreviewClose) activePreviewClose();
+            loginModal.classList.add("show");
+
+            const viewer = document.createElement("div");
+            viewer.className = "portal-image-viewer";
+            viewer.setAttribute("role", "dialog");
+            viewer.setAttribute("aria-modal", "true");
+            viewer.setAttribute("aria-label", description || "Project preview");
+            viewer.innerHTML = `
+                <div class="portal-image-viewer__backdrop" data-preview-close></div>
+                <section class="portal-image-viewer__bubble">
+                    <button class="portal-image-viewer__close" type="button" data-preview-close aria-label="Close preview"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                    <div class="portal-image-viewer__stage"><img class="portal-image-viewer__image" draggable="false"></div>
+                    <div class="portal-image-viewer__controls" aria-label="Image zoom controls">
+                        <button type="button" data-preview-zoom-out aria-label="Zoom out"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
+                        <button type="button" data-preview-reset aria-label="Reset zoom"><span data-preview-zoom-label>100%</span></button>
+                        <button type="button" data-preview-zoom-in aria-label="Zoom in"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+                    </div>
+                </section>
+            `;
+
+            const image = viewer.querySelector(".portal-image-viewer__image");
+            const stage = viewer.querySelector(".portal-image-viewer__stage");
+            const bubble = viewer.querySelector(".portal-image-viewer__bubble");
+            const zoomLabel = viewer.querySelector("[data-preview-zoom-label]");
+            let scale = 1;
+            let offsetX = 0;
+            let offsetY = 0;
+            let dragStart = null;
+
+            image.alt = description || "Project preview";
+
+            const fitViewerToImage = () => {
+                const ratio = image.naturalWidth / image.naturalHeight;
+                if (!Number.isFinite(ratio) || ratio <= 0) return;
+
+                const controlsHeight = 72;
+                const availableWidth = Math.max(240, window.innerWidth - 36);
+                const availableHeight = Math.max(240, window.innerHeight - 36 - controlsHeight);
+                const imageWidth = Math.min(availableWidth, availableHeight * ratio);
+                const imageHeight = imageWidth / ratio;
+
+                bubble.style.width = `${Math.round(imageWidth)}px`;
+                bubble.style.height = `${Math.round(imageHeight + controlsHeight)}px`;
+                stage.style.width = `${Math.round(imageWidth)}px`;
+                stage.style.height = `${Math.round(imageHeight)}px`;
+            };
+
+            const onResize = () => fitViewerToImage();
+            image.addEventListener("load", fitViewerToImage);
+            image.src = source;
+
+            const updateImage = () => {
+                image.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+                zoomLabel.textContent = `${Math.round(scale * 100)}%`;
+                stage.classList.toggle("is-zoomed", scale > 1);
+            };
+
+            const setZoom = (nextScale) => {
+                scale = Math.min(3, Math.max(1, Number(nextScale.toFixed(2))));
+                if (scale === 1) {
+                    offsetX = 0;
+                    offsetY = 0;
+                }
+                updateImage();
+            };
+
+            const preventCopy = (event) => event.preventDefault();
+            const onKeyDown = (event) => {
+                if (event.key === "Escape") close();
+                if (event.key === "+" || event.key === "=") {
+                    event.preventDefault();
+                    setZoom(scale + 0.2);
+                }
+                if (event.key === "-") {
+                    event.preventDefault();
+                    setZoom(scale - 0.2);
+                }
+            };
+            const close = () => {
+                document.removeEventListener("keydown", onKeyDown);
+                document.removeEventListener("copy", preventCopy);
+                window.removeEventListener("resize", onResize);
+                viewer.remove();
+                document.body.classList.remove("portal-preview-open");
+                if (activePreviewClose === close) activePreviewClose = null;
+            };
+
+            viewer.addEventListener("click", (event) => {
+                event.stopPropagation();
+                if (event.target.closest("[data-preview-close]")) close();
+            });
+            viewer.addEventListener("contextmenu", (event) => event.preventDefault());
+            viewer.addEventListener("dragstart", (event) => event.preventDefault());
+            viewer.addEventListener("selectstart", (event) => event.preventDefault());
+            viewer.querySelector("[data-preview-zoom-in]").addEventListener("click", () => setZoom(scale + 0.2));
+            viewer.querySelector("[data-preview-zoom-out]").addEventListener("click", () => setZoom(scale - 0.2));
+            viewer.querySelector("[data-preview-reset]").addEventListener("click", () => setZoom(1));
+            stage.addEventListener("wheel", (event) => {
+                event.preventDefault();
+                setZoom(scale + (event.deltaY < 0 ? 0.2 : -0.2));
+            }, { passive: false });
+            stage.addEventListener("pointerdown", (event) => {
+                if (scale === 1) return;
+                dragStart = { x: event.clientX, y: event.clientY, offsetX, offsetY };
+                stage.setPointerCapture(event.pointerId);
+            });
+            stage.addEventListener("pointermove", (event) => {
+                if (!dragStart) return;
+                offsetX = dragStart.offsetX + event.clientX - dragStart.x;
+                offsetY = dragStart.offsetY + event.clientY - dragStart.y;
+                updateImage();
+            });
+            stage.addEventListener("pointerup", () => { dragStart = null; });
+            stage.addEventListener("pointercancel", () => { dragStart = null; });
+
+            document.body.appendChild(viewer);
+            document.body.classList.add("portal-preview-open");
+            document.addEventListener("keydown", onKeyDown);
+            document.addEventListener("copy", preventCopy);
+            window.addEventListener("resize", onResize);
+            if (image.complete) fitViewerToImage();
+            activePreviewClose = close;
+            viewer.querySelector(".portal-image-viewer__close").focus();
+        }
+
+        document.addEventListener("click", (event) => {
+            const viewButton = event.target.closest(".portal-preview-view");
+            if (!viewButton) return;
+
+            event.preventDefault();
+            event.stopPropagation();
+            const previewImage = viewButton.closest(".portal-preview-img")?.querySelector("img");
+            if (previewImage) openProjectPreview(previewImage.currentSrc || previewImage.src, previewImage.alt);
+        });
+
+        document.addEventListener("contextmenu", (event) => {
+            if (event.target.closest(".portal-preview-img")) event.preventDefault();
+        });
+
+        document.addEventListener("dragstart", (event) => {
+            if (event.target.closest(".portal-preview-img")) event.preventDefault();
+        });
 
         if (openLoginBtns.length > 0) {
             openLoginBtns.forEach(btn => {
@@ -562,9 +725,12 @@ import SpeedInsights from '@vercel/speed-insights/astro';
 
         function attachLoginFormListener() {
             const form = document.getElementById("loginForm");
+            if (!form) return;
+
             const submitBtnText = form.querySelector(".btn-text");
-            
-            if(!form) return;
+            const setSubmitButtonText = (text) => {
+                if (submitBtnText) submitBtnText.innerText = text;
+            };
 
             form.addEventListener("submit", async function(e) {
                 e.preventDefault();
@@ -572,7 +738,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                 const user = document.getElementById("lognProject").value;
                 const otp = document.getElementById("lognOTP").value;
                 
-                submitBtnText.innerText = "Authenticating...";
+                setSubmitButtonText("Authenticating...");
 
                 try {
                     const response = await fetch(GOOGLE_API_URL, {
@@ -588,11 +754,11 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                         window.renderDashboard();
                     } else {
                         alert(data.message);
-                        submitBtnText.innerText = "Submit";
+                        setSubmitButtonText("Submit");
                     }
                 } catch (error) {
                     alert("Connection error. Please try again.");
-                    submitBtnText.innerText = "Submit";
+                    setSubmitButtonText("Submit");
                 }
             });
         }
@@ -637,8 +803,10 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             // Grey out logic
             const btnClass = isPaid ? "tmp-btn hover-icon-reverse radius-round w-100" : "tmp-btn w-100 disabled-btn";
             const btnText = isPaid ? "Download Files" : "Payment Pending";
-            const disabledAttr = isPaid ? "" : "disabled";
-            const downloadHref = isPaid ? `href="${project.downloadLink}" target="_blank"` : `href="#"`;
+            const disabledAttr = isPaid ? "" : 'aria-disabled="true" tabindex="-1"';
+            const downloadHref = isPaid
+                ? `href="${project.downloadLink}" download="${project.projectName || 'project-download'}"`
+                : `href="#"`;
 
             const projectHTML = `
                 <button class="portal-back-btn" onclick="window.renderDashboard()">
@@ -650,7 +818,13 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                 
                 ${project.image ? `
                     <div class="portal-preview-img mb--20">
-                        <img src="${project.image}" alt="${project.projectName} Preview">
+                        <img src="${project.image}" alt="${project.projectName} Preview" draggable="false">
+                        <button type="button" class="portal-preview-view" aria-label="View project preview">
+                            <span class="portal-preview-view__content">
+                                <span class="portal-preview-view__icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+                                <span>View</span>
+                            </span>
+                        </button>
                     </div>
                 ` : ''}
                 
@@ -696,32 +870,101 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             });
         }
 
-        // --- 6. Form Submission & Success Popup Logic ---
+// --- 6. Form Submission & Success Popup Logic ---
         const servicesForm = document.getElementById("servicesForm");
         const closeSuccessBtn = document.getElementById("closeSuccessBtn");
         const closeSuccessPopupIcon = document.getElementById("closeSuccessPopupIcon");
+        
+        // Grab the dynamic popup elements
+        const popupIconContainer = document.getElementById("popupIconContainer");
+        const popupIcon = document.getElementById("popupIcon");
+        const popupTitle = document.getElementById("popupTitle");
+        const popupText = document.getElementById("popupText");
 
         if (servicesForm) {
-            servicesForm.addEventListener("submit", function(e) {
-                e.preventDefault(); // Prevents standard page-reload on submit
+            servicesForm.addEventListener("submit", async function(e) {
+                e.preventDefault(); 
                 
-                /* 
-                  NOTE: Add your form submission API logic here (e.g., fetch request to Formspree, Vercel Serverless Function, etc.)
-                */
+                // Gather data including your new fields
+                const name = document.getElementById("servFullName").value;
+                const email = document.getElementById("servEmail").value;
+                const phone = document.getElementById("servPhone").value;
+                const company = document.getElementById("servCompany").value;
+                const website = document.getElementById("servWebsite").value;
+                const whatsapp = document.getElementById("servWhatsApp").checked ? "Yes" : "No";
+                const projectType = document.querySelector('input[name="servRequired"]:checked').value;
+                
+                const now = new Date();
+                const projectDate = now.toLocaleDateString('en-GB'); 
+                const time = now.toLocaleTimeString('en-US', { hour12: false }); 
+                
+                const payload = {
+                    action: "signup", 
+                    Name: name,
+                    Contact: email,
+                    Phone: phone,
+                    Company: company,
+                    Website: website,
+                    WhatsApp: whatsapp,
+                    ProjectType: projectType,
+                    ProjectDate: projectDate,
+                    Time: time,
+                    Completion: "New"
+                };
 
-                // 1. Hide the services modal
-                servicesModal.classList.remove("show");
-                
-                // 2. Show the success popup
-                successPopup.classList.add("show");
-                
-                // 3. Reset the form inputs for the next time it's opened
-                servicesForm.reset();
-                if (whatsappContainer) whatsappContainer.style.display = 'none';
+                const submitBtnText = servicesForm.querySelector(".btn-text");
+                const originalText = submitBtnText.innerText;
+                submitBtnText.innerText = "Submitting...";
+
+                try {
+                    const response = await fetch(GOOGLE_API_URL, {
+                        method: "POST",
+                        body: JSON.stringify(payload),
+                        headers: { "Content-Type": "text/plain;charset=utf-8" }
+                    });
+                    
+                    const data = await response.json();
+                    
+                    // Hide the form modal first
+                    servicesModal.classList.remove("show");
+
+                    if (data.success) {
+                        // SUCCESS VIEW: Make the popup look like a win
+                        if (popupIconContainer) popupIconContainer.style.color = "#FF8C33"; 
+                        if (popupIcon) popupIcon.className = "fa-solid fa-circle-check";
+                        if (popupTitle) popupTitle.innerText = "Project Started!";
+                        if (popupText) popupText.innerText = "Thank you! Your project details have been successfully logged. We will review them and touch base with you shortly.";
+                        
+                        servicesForm.reset();
+                        if (whatsappContainer) whatsappContainer.style.display = 'none';
+                    } else {
+                        // SERVER ERROR VIEW: Google Sheet returned success: false
+                        if (popupIconContainer) popupIconContainer.style.color = "#f80707"; 
+                        if (popupIcon) popupIcon.className = "fa-solid fa-circle-xmark";
+                        if (popupTitle) popupTitle.innerText = "That Did Not Work";
+                        if (popupText) popupText.innerText = "Unfortunately, we stumbled upon an issue processing your request. Please send us a WhatsApp on 077 420 4639 or email connect@azungu.co.za, and we’ll assist you directly.";
+                    }
+                    
+                    // Show the formatted popup
+                    successPopup.classList.add("show");
+
+                } catch (error) {
+                    console.error("Network Error:", error);
+                    // NETWORK ERROR VIEW: Fetch failed completely (e.g., offline)
+                    servicesModal.classList.remove("show");
+                    
+                    if (popupIconContainer) popupIconContainer.style.color = "#f80707";
+                    if (popupIcon) popupIcon.className = "fa-solid fa-circle-xmark";
+                    if (popupTitle) popupTitle.innerText = "Connection Issue";
+                    if (popupText) popupText.innerText = "We can't reach the server right now. Please check your internet connection, or reach out to us directly.";
+                    
+                    successPopup.classList.add("show");
+                } finally {
+                    submitBtnText.innerText = originalText;
+                }
             });
         }
 
-        // Handlers to close the success popup
         const hideSuccessPopup = () => successPopup.classList.remove("show");
         if (closeSuccessBtn) closeSuccessBtn.addEventListener("click", hideSuccessPopup);
         if (closeSuccessPopupIcon) closeSuccessPopupIcon.addEventListener("click", hideSuccessPopup);
