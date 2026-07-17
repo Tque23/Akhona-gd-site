@@ -26835,27 +26835,31 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
     border-radius: 24px !important;
 }
 
-    /* Full page canvas styling */
-    html, body {
+    /* Scrollable wave background: canvas is document-sized, not fixed to the viewport. */
+    html {
+        background-color: #0b0b0b !important;
+    }
+
+    body.has-wave-background {
+        position: relative;
+        z-index: 0;
         background-color: transparent !important;
     }
 
-    /* Ensure your main wrappers don't block the canvas either */
     .main-wrapper-inner,
     .coming-soon-wrapper {
         background-color: transparent !important;
     }
 
-    #wave-canvas {
-        position: fixed !important;
+    body.has-wave-background #wave-canvas {
+        position: absolute !important;
         top: 0 !important;
         left: 0 !important;
         width: 100vw !important;
-        height: 100vh !important;
-        height: 100dvh !important; /* Prevents jumping on mobile browsers when scrolling */
-        z-index: -9999 !important; /* Forces it behind absolutely everything */
-        pointer-events: none !important; /* Allows clicks to pass through */
-        background-color: #0b0b0b !important; /* Your base color */
+        min-height: 100dvh;
+        z-index: -1 !important;
+        pointer-events: none !important;
+        background-color: #0b0b0b !important;
     }
 
     /* Ensure content stays above the fixed animated background */

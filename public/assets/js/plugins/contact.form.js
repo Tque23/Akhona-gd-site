@@ -41,7 +41,7 @@
                 $(formMessages).text(response);
 
                 // Clear the form.
-                $('#contact-name, #contact-phone, #contact-email, #subject, #contact-message').val('');
+                $('#name, #email,  #subject, #message').val('');
             })
             .fail(function (data) {
                 // Make sure that the formMessages div has the 'error' class.
