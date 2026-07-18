@@ -26874,7 +26874,8 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
       /* Import the modern font directly into this component */
   @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
 
-  :root {
+  .coming-soon-section,
+  .not-found-section {
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.7);
     --accent: #ffb703;
@@ -26893,7 +26894,7 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
   }
 
   /* Animated Gradient Background */
-  .background-anim {
+  .coming-soon-wrapper .background-anim {
     position: absolute;
     top: -50%;
     left: -50%;
@@ -26912,7 +26913,8 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
   }
 
   /* Main Container */
-  .container {
+  .coming-soon-section > .container,
+  .not-found-section > .container {
     width: 100%;
     max-width: 800px;
     padding: 2rem;
@@ -26921,11 +26923,13 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
   }
 
   /* Glassmorphism Panel */
-  .glass-panel {
+  .coming-soon-section .glass-panel,
+  .not-found-section .glass-panel {
     text-align: center;
   }
 
-  .brand {
+  .coming-soon-section .brand,
+  .not-found-section .brand {
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 4px;
@@ -26934,20 +26938,23 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
     margin-bottom: 2rem;
   }
 
-  .title {
+  .coming-soon-section .glass-panel .title,
+  .not-found-section .glass-panel .title {
     font-size: 4rem;
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 1.5rem;
   }
 
-  .highlight {
+  .coming-soon-section .highlight,
+  .not-found-section .highlight {
     color: #FF8C33;
     position: relative;
     display: inline-block;
   }
 
-  .description {
+  .coming-soon-section .glass-panel .description,
+  .not-found-section .glass-panel .description {
     font-size: 1.1rem;
     line-height: 1.6;
     color: var(--text-secondary);
@@ -26956,14 +26963,16 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
   }
 
   /* Form Styles */
-  .notify-form {
+  .coming-soon-section .notify-form,
+  .not-found-section .notify-form {
     display: flex;
     gap: 10px;
     max-width: 450px;
     margin: 0 auto 3rem;
   }
 
-  .email-input {
+  .coming-soon-section .email-input,
+  .not-found-section .email-input {
     flex: 1;
     padding: 1rem 1.5rem;
     border-radius: 50px;
@@ -26976,16 +26985,19 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
     transition: all 0.3s ease;
   }
 
-  .email-input:focus {
+  .coming-soon-section .email-input:focus,
+  .not-found-section .email-input:focus {
     border-color: var(--accent);
     background: rgba(0, 0, 0, 0.4);
   }
 
-  .email-input::placeholder {
+  .coming-soon-section .email-input::placeholder,
+  .not-found-section .email-input::placeholder {
     color: rgba(255, 255, 255, 0.4);
   }
 
-  .submit-btn {
+  .coming-soon-section .submit-btn,
+  .not-found-section .submit-btn {
     padding: 1rem 2rem;
     border-radius: 50px;
     border: none;
@@ -26998,20 +27010,23 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
     transition: all 0.3s ease;
   }
 
-  .submit-btn:hover {
+  .coming-soon-section .submit-btn:hover,
+  .not-found-section .submit-btn:hover {
     background: var(--accent);
     transform: translateY(-2px);
   }
 
   /* Social Links */
-  .social-links {
+  .coming-soon-section .social-links,
+  .not-found-section .social-links {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
   }
 
-  .social-links a {
+  .coming-soon-section .social-links a,
+  .not-found-section .social-links a {
     color: var(--text-secondary);
     text-decoration: none !important;
     font-size: 0.9rem;
@@ -27019,30 +27034,36 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
     transition: color 0.3s ease;
   }
 
-  .social-links a:hover {
+  .coming-soon-section .social-links a:hover,
+  .not-found-section .social-links a:hover {
     color: var(--accent);
   }
 
-  .divider {
+  .coming-soon-section .divider,
+  .not-found-section .divider {
     color: rgba(255, 255, 255, 0.2);
     font-size: 0.8rem;
   }
 
   /* Responsive Design */
   @media (max-width: 768px) {
-    .glass-panel {
+    .coming-soon-section .glass-panel,
+    .not-found-section .glass-panel {
       padding: 2.5rem 1.5rem;
     }
 
-    .title {
+    .coming-soon-section .glass-panel .title,
+    .not-found-section .glass-panel .title {
       font-size: 2.8rem;
     }
 
-    .notify-form {
+    .coming-soon-section .notify-form,
+    .not-found-section .notify-form {
       flex-direction: column;
     }
 
-    .submit-btn {
+    .coming-soon-section .submit-btn,
+    .not-found-section .submit-btn {
       width: 100%;
     }
   }
@@ -27415,4 +27436,98 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
 
 ul.ft-link.tmp-link-animation {
   padding-left: 0 !important; 
+}
+
+/* Mobile layout rhythm: comfortable edges and consistent section spacing. */
+@media (max-width: 767px) {
+    .tmp-section-gap {
+        padding: 48px 0;
+    }
+
+    .tmp-section-gapTop {
+        padding-top: 48px;
+    }
+
+    .breadcrumb-area {
+        padding-top: 86px;
+        padding-bottom: 36px;
+    }
+
+    .tmp-header-area .container,
+    .rpp-banner-three-area > .container,
+    .counter-area > .container,
+    .latest-service-area > .container,
+    .my-skill > .container,
+    .our-price-plan-area > .container,
+    .page-content-wrapper > .breadcrumb-area > .container,
+    .page-content-wrapper > .contact-area-wrapper > .container,
+    .page-content-wrapper > section > .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .banner-three-main-wrapper {
+        padding: 82px 0 40px;
+    }
+
+    .banner-three-main-wrapper .bg-benner-img-three {
+        max-width: 340px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .banner-three-main-wrapper .inner {
+        padding-top: 22px;
+    }
+
+    .banner-three-main-wrapper .banner-right-content {
+        margin-top: 24px;
+    }
+
+    .banner-three-main-wrapper .banner-right-content .find-me-on {
+        margin-top: 20px;
+    }
+
+    .counter-area > .container > .row.g-5,
+    .counter-area-right-content .row.g-5,
+    .our-price-plan-area .row {
+        --bs-gutter-y: 20px;
+    }
+
+    .section-head.mb--60,
+    .section-head.mb--50 {
+        margin-bottom: 32px !important;
+    }
+
+    .contact-area-wrapper.tmp-section-gap {
+        padding: 44px 0;
+    }
+
+    .contact-info-wrap > .row {
+        --bs-gutter-y: 16px;
+    }
+
+    .contact-info {
+        padding: 32px 18px;
+    }
+
+    .contact-info .contact-icon {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 16px;
+        font-size: 23px;
+    }
+
+    .contact-info .title {
+        font-size: 26px;
+        margin-bottom: 8px;
+    }
+
+    .get-in-touch-area.tmp-section-gapTop {
+        padding-top: 44px;
+    }
+
+    .contact-get-in-touch-wrap .get-in-touch-wrapper {
+        padding: 26px 18px;
+    }
 }
