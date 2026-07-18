@@ -26797,6 +26797,35 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
     background: rgba(255, 255, 255, 0.1);
 }
 
+.portfolio-form .password-input-wrapper {
+    position: relative;
+}
+
+.portfolio-form .password-input-wrapper input {
+    padding-right: 52px;
+}
+
+.portfolio-form .password-visibility-toggle {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 48px;
+    border: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.portfolio-form .password-visibility-toggle:hover {
+    color: #FF8C33;
+}
+
+.portfolio-form .password-visibility-toggle:focus-visible {
+    outline: 2px solid #FF8C33;
+    outline-offset: -5px;
+    border-radius: 8px;
+}
+
 .portfolio-form .submit-btn {
     width: 100%;
     border: none;
@@ -27531,4 +27560,3 @@ ul.ft-link.tmp-link-animation {
         padding: 26px 18px;
     }
 }
-

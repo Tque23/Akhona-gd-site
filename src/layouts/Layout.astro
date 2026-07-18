@@ -58,7 +58,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                                     <li><a href="#" class="openLoginModal">Log In</a></li>
                                 </li>
                                 <li>
-                                    <a href="#" class="openServicesModal">Start Your Project</a>
+                                    <a href="/#start-your-project" class="openServicesModal">Start Your Project</a>
                                 </li>
                                 <li>
                                     <a href="/comingsoon">Gallery</a>
@@ -173,7 +173,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                             <i class="fa-regular fa-chevron-down" aria-hidden="true"></i>
                         </a>
                         <ul class="submenu">
-                            <li><a href="#" class="openServicesModal">Start Your Project</a></li>
+                            <li><a href="/#start-your-project" class="openServicesModal">Start Your Project</a></li>
                             <li><a href="#" class="openLoginModal">Log In</a></li>
                             <li><a href="help.html">Help</a></li>
                         </ul>
@@ -223,7 +223,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                         <div class="single-footer-wrapper quick-link-wrap">
                             <h5 class="ft-title">Quick Link</h5>
                             <ul class="ft-link tmp-link-animation">
-                                <li><a href="#" class="openServicesModal">Start Your Project</a></li>
+                                <li><a href="/#start-your-project" class="openServicesModal">Start Your Project</a></li>
                                 <li><a href="#" class="openLoginModal">Log In</a></li>
                                 <li><a href="/comingsoon">Gallery</a></li>
                                 <li><a href="/contact">Contact</a></li>
@@ -517,13 +517,18 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                     
                     <div class="form-group">
                         <label for="lognOTP">Access Code <span class="required">*</span></label>
-                        <input type="text" id="lognOTP" name="lognOTP" required placeholder="The Code You Received Via Email/Whatsapp">
+                        <div class="password-input-wrapper">
+                            <input type="password" id="lognOTP" name="lognOTP" required placeholder="The Code You Received Via Email/Whatsapp">
+                            <button type="button" class="password-visibility-toggle" data-password-toggle aria-controls="lognOTP" aria-label="Show access code" aria-pressed="false">
+                                <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
                     </div>
                     
                     <!-- Updated Link Container -->
                     <div class="modal-subtitle tmp-link-animation" style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
                         <a href="/404" class="number">Request Code</a>
-                        <a href="#" class="openServicesModal number">First Time Here? Sign up</a>
+                        <a href="/#start-your-project" class="openServicesModal number">First Time Here? Sign up</a>
                     </div>
                     
                     <!-- Added a top margin to space the submit button from the links -->
@@ -603,6 +608,32 @@ import SpeedInsights from '@vercel/speed-insights/astro';
         // --- 2. Services Modal Logic ---
         const servicesModal = document.getElementById("servicesModal");
         const closeServicesBtn = document.getElementById("closeServicesModal");
+        const servicesModalHash = "#start-your-project";
+
+        const openServicesModal = (updateUrl = true) => {
+            // Close the login modal if it's currently open
+            const loginModalEl = document.getElementById("loginModal");
+            if (loginModalEl && loginModalEl.classList.contains("show")) {
+                loginModalEl.classList.remove("show");
+            }
+
+            servicesModal?.classList.add("show");
+            if (updateUrl && window.location.hash !== servicesModalHash) {
+                window.history.pushState(null, "", servicesModalHash);
+            }
+        };
+
+        const closeServicesModal = () => {
+            servicesModal?.classList.remove("show");
+            if (window.location.hash === servicesModalHash) {
+                window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+            }
+        };
+
+        const syncServicesModalWithHash = () => {
+            if (window.location.hash === servicesModalHash) servicesModal?.classList.add("show");
+            else servicesModal?.classList.remove("show");
+        };
 
         // Use event delegation so dynamic/recreated buttons still work
         document.addEventListener('click', (e) => {
@@ -610,24 +641,18 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             const btn = e.target.closest('.openServicesModal');
             
             if (btn) {
-                e.preventDefault(); 
-                
-                // Close the login modal if it's currently open
-                const loginModalEl = document.getElementById("loginModal");
-                if (loginModalEl && loginModalEl.classList.contains("show")) {
-                    loginModalEl.classList.remove("show");
-                }
-                
-                // Open the services modal
-                if (servicesModal) {
-                    servicesModal.classList.add("show");
-                }
+                e.preventDefault();
+                openServicesModal();
             }
         });
 
         if (closeServicesBtn) {
-            closeServicesBtn.addEventListener('click', () => servicesModal.classList.remove("show"));
+            closeServicesBtn.addEventListener('click', closeServicesModal);
         }
+
+        window.addEventListener("hashchange", syncServicesModalWithHash);
+        window.addEventListener("popstate", syncServicesModalWithHash);
+        syncServicesModalWithHash();
 
         // --- 3. Login & Portal Logic ---
         const loginModal = document.getElementById("loginModal");
@@ -635,6 +660,20 @@ import SpeedInsights from '@vercel/speed-insights/astro';
         const closeLoginBtn = document.getElementById("closeLoginModal");
         const loginForm = document.getElementById("loginForm");
         const modalScrollWrapper = loginModal.querySelector(".modal-scroll-wrapper");
+
+        document.addEventListener("click", (event) => {
+            const toggle = event.target.closest("[data-password-toggle]");
+            if (!toggle) return;
+
+            const passwordInput = document.getElementById(toggle.getAttribute("aria-controls"));
+            if (!passwordInput) return;
+
+            const isPasswordVisible = passwordInput.type === "text";
+            passwordInput.type = isPasswordVisible ? "password" : "text";
+            toggle.setAttribute("aria-pressed", String(!isPasswordVisible));
+            toggle.setAttribute("aria-label", isPasswordVisible ? "Show access code" : "Hide access code");
+            toggle.querySelector("i").className = isPasswordVisible ? "fa-regular fa-eye" : "fa-regular fa-eye-slash";
+        });
 
         // Save original modal HTML so we can restore it on close
         const originalLoginHTML = modalScrollWrapper.innerHTML; 
@@ -1005,7 +1044,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
         window.addEventListener('click', (event) => { 
             if (event.target === portfolioModal && portfolioModal) portfolioModal.classList.remove("show"); 
             if (event.target === loginModal && loginModal) loginModal.classList.remove("show"); 
-            if (event.target === servicesModal && servicesModal) servicesModal.classList.remove("show"); 
+            if (event.target === servicesModal && servicesModal) closeServicesModal();
             if (event.target === successPopup && successPopup) successPopup.classList.remove("show"); 
         });
 
