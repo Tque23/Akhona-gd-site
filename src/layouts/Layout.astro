@@ -23,7 +23,9 @@ import SpeedInsights from '@vercel/speed-insights/astro';
     <meta property="og:image" content="https://azungu.co.za/assets/images/logo/man.png">
     <meta property="og:site_name" content="Graphic Design by Akhona Zungu">
 
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg">
+    <!-- For your modern SVG icon -->
+        <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+        <link rel="alternate icon" href="/favicon.ico">
 
     <link rel="stylesheet" href="assets/css/plugins/swiper.css">
     <link rel="stylesheet" href="assets/css/plugins/odometer.css">
@@ -167,15 +169,11 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li class="has-dropdown">
-                        <a href="#">Client Portal
-                            <i class="fa-regular fa-chevron-down" aria-hidden="true"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="#" class="openServicesModal">Start Your Project</a></li>
-                            <li><a href="#" class="openLoginModal">Log In</a></li>
-                            <li><a href="help.html">Help</a></li>
-                        </ul>
+                    <li>
+                        <a href="#" class="openLoginModal">Log In</a>
+                    </li>
+                    <li>
+                        <a href="#" class="openServicesModal">Start Your Project</a>
                     </li>
                     <li>
                         <a href="/comingsoon">Gallery</a>
@@ -190,6 +188,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                     <div class="social-link">
                         <a href="https://www.instagram.com/aszungu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
                         <a href="https://www.linkedin.com/in/aszungu" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="https://wa.me/27774204639" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
