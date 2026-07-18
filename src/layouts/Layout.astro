@@ -344,29 +344,28 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             to { background-position: -200% center; }
         }
 
-        /* This is scoped to the project preview so it cannot clash with other loaders. */
-        .portal-image-viewer__stage {
-            position: relative;
-            isolation: isolate;
+        /* Inline loader shown in the project card while the preview image preloads. */
+        .portal-preview-slot {
+            width: 100%;
+            min-height: 220px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: transparent;
         }
 
         .portal-preview-loader {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
             display: grid;
             place-items: center;
             align-content: center;
             gap: 16px;
             color: #ffffff;
-            background: transparent;
             pointer-events: none;
-            opacity: 1;
-            transition: opacity 180ms ease;
         }
 
-        .portal-preview-loader.is-hidden {
-            opacity: 0;
+        .portal-preview-loader--inline {
+            min-height: 220px;
+            background: transparent;
         }
 
         .portal-preview-loader__mark {
@@ -406,27 +405,6 @@ import SpeedInsights from '@vercel/speed-insights/astro';
 
         .portal-preview-loader.is-error .portal-preview-loader__label {
             color: #ffd4d4;
-        }
-
-        /* Do not reveal the frame, controls, or image until it has loaded. */
-        .portal-image-viewer.is-loading .portal-image-viewer__bubble {
-            visibility: hidden;
-            opacity: 0;
-            pointer-events: none;
-            animation: none;
-        }
-
-        .portal-image-viewer.is-ready .portal-image-viewer__bubble {
-            animation: portal-preview-bubble-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
-        }
-
-        .portal-image-viewer__image {
-            opacity: 1;
-            transition: transform 150ms ease, opacity 180ms ease;
-        }
-
-        .portal-image-viewer__image.is-loading {
-            opacity: 0;
         }
 
         @keyframes portal-preview-loader-spin {
@@ -668,28 +646,87 @@ import SpeedInsights from '@vercel/speed-insights/astro';
         let clientProjects = [];
         let activePreviewClose = null;
 
+        function buildPortalPreviewCardMarkup(imageSrc, projectName) {
+            return `
+                <div class="portal-preview-img mb--20">
+                    <img src="${imageSrc}" alt="${projectName} Preview" draggable="false">
+                    <button type="button" class="portal-preview-view" aria-label="View project preview">
+                        <span class="portal-preview-view__content">
+                            <span class="portal-preview-view__icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+                            <span>View</span>
+                        </span>
+                    </button>
+                </div>
+            `;
+        }
+
+        function buildPortalPreviewLoaderMarkup() {
+            return `
+                <div class="portal-preview-slot mb--20" data-portal-preview-slot>
+                    <div class="portal-preview-loader portal-preview-loader--inline" data-portal-card-loader role="status" aria-live="polite">
+                        <div class="portal-preview-loader__mark" aria-hidden="true">
+                            <span class="portal-preview-loader__cube portal-preview-loader__cube--colour"></span>
+                            <span class="portal-preview-loader__cube portal-preview-loader__cube--glass"></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function mountPortalPreviewCard(slot, imageSrc, projectName) {
+            const loaderShownAt = Date.now();
+            const minLoaderMs = 280;
+            const preload = new Image();
+            let settled = false;
+
+            const finish = (success) => {
+                if (settled || !slot.isConnected) return;
+                settled = true;
+
+                const revealCard = () => {
+                    if (!slot.isConnected) return;
+                    if (success) {
+                        slot.outerHTML = buildPortalPreviewCardMarkup(imageSrc, projectName);
+                        return;
+                    }
+
+                    const loader = slot.querySelector("[data-portal-card-loader]");
+                    loader?.classList.add("is-error");
+                    const label = loader?.querySelector(".portal-preview-loader__label");
+                    if (label) label.textContent = "Preview unavailable";
+                };
+
+                const elapsed = Date.now() - loaderShownAt;
+                const remaining = minLoaderMs - elapsed;
+                if (remaining > 0) window.setTimeout(revealCard, remaining);
+                else revealCard();
+            };
+
+            preload.addEventListener("load", () => finish(true), { once: true });
+            preload.addEventListener("error", () => finish(false), { once: true });
+            preload.src = imageSrc;
+
+            if (preload.complete) {
+                if (preload.naturalWidth > 0) finish(true);
+                else finish(false);
+            }
+        }
+
         function openProjectPreview(source, description) {
             if (activePreviewClose) activePreviewClose();
             loginModal.classList.add("show");
 
             const viewer = document.createElement("div");
-            viewer.className = "portal-image-viewer is-loading";
+            viewer.className = "portal-image-viewer is-ready";
             viewer.setAttribute("role", "dialog");
             viewer.setAttribute("aria-modal", "true");
             viewer.setAttribute("aria-label", description || "Project preview");
             viewer.innerHTML = `
                 <div class="portal-image-viewer__backdrop" data-preview-close></div>
-                <div class="portal-preview-loader" data-preview-loader role="status" aria-live="polite">
-                    <div class="portal-preview-loader__mark" aria-hidden="true">
-                        <span class="portal-preview-loader__cube portal-preview-loader__cube--colour"></span>
-                        <span class="portal-preview-loader__cube portal-preview-loader__cube--glass"></span>
-                    </div>
-                    <span class="portal-preview-loader__label" data-preview-loader-label>Loading preview…</span>
-                </div>
                 <section class="portal-image-viewer__bubble">
                     <button class="portal-image-viewer__close" type="button" data-preview-close aria-label="Close preview"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
                     <div class="portal-image-viewer__stage">
-                        <img class="portal-image-viewer__image is-loading" draggable="false">
+                        <img class="portal-image-viewer__image" draggable="false">
                     </div>
                     <div class="portal-image-viewer__controls" aria-label="Image zoom controls">
                         <button type="button" data-preview-zoom-out aria-label="Zoom out"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
@@ -703,13 +740,10 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             const stage = viewer.querySelector(".portal-image-viewer__stage");
             const bubble = viewer.querySelector(".portal-image-viewer__bubble");
             const zoomLabel = viewer.querySelector("[data-preview-zoom-label]");
-            const loader = viewer.querySelector("[data-preview-loader]");
-            const loaderLabel = viewer.querySelector("[data-preview-loader-label]");
             let scale = 1;
             let offsetX = 0;
             let offsetY = 0;
             let dragStart = null;
-            let previewState = "loading";
 
             image.alt = description || "Project preview";
 
@@ -729,34 +763,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                 stage.style.height = `${Math.round(imageHeight)}px`;
             };
 
-            const onResize = () => {
-                if (previewState === "loaded") fitViewerToImage();
-            };
-
-            const revealImage = () => {
-                if (previewState !== "loading" || !image.naturalWidth) return;
-                previewState = "loaded";
-                fitViewerToImage();
-                image.classList.remove("is-loading");
-                viewer.classList.remove("is-loading");
-                viewer.classList.add("is-ready");
-                loader?.classList.add("is-hidden");
-                window.setTimeout(() => {
-                    if (previewState === "loaded" && loader) loader.hidden = true;
-                }, 180);
-            };
-
-            const showImageError = () => {
-                if (previewState !== "loading") return;
-                previewState = "error";
-                image.hidden = true;
-                loader?.classList.add("is-error");
-                loader?.setAttribute("aria-label", "Preview could not be loaded");
-                if (loaderLabel) loaderLabel.textContent = "Preview unavailable";
-            };
-
-            image.addEventListener("load", revealImage, { once: true });
-            image.addEventListener("error", showImageError, { once: true });
+            const onResize = () => fitViewerToImage();
 
             const updateImage = () => {
                 image.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
@@ -827,14 +834,10 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             document.addEventListener("keydown", onKeyDown);
             document.addEventListener("copy", preventCopy);
             window.addEventListener("resize", onResize);
-            if (!source) {
-                showImageError();
-            } else {
+            image.addEventListener("load", fitViewerToImage, { once: true });
+            if (source) {
                 image.src = source;
-                if (image.complete) {
-                    if (image.naturalWidth > 0) revealImage();
-                    else window.setTimeout(showImageError, 0);
-                }
+                if (image.complete && image.naturalWidth > 0) fitViewerToImage();
             }
             activePreviewClose = close;
             viewer.querySelector(".portal-image-viewer__close").focus();
@@ -973,17 +976,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                 <h3 class="modal-title" style="margin-top:20px;">${project.projectType}</h3>
                 <span class="portal-tag mb--20" style="display:inline-block; color: ${isPaid ? 'green' : 'red'}; font-weight: bold;">${isPaid ? 'Paid' : 'Outstanding Payment'}</span>
                 
-                ${project.image ? `
-                    <div class="portal-preview-img mb--20">
-                        <img src="${project.image}" alt="${project.projectName} Preview" draggable="false">
-                        <button type="button" class="portal-preview-view" aria-label="View project preview">
-                            <span class="portal-preview-view__content">
-                                <span class="portal-preview-view__icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
-                                <span>View</span>
-                            </span>
-                        </button>
-                    </div>
-                ` : ''}
+                ${project.image ? buildPortalPreviewLoaderMarkup() : ''}
                 
                 <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 25px 0;">
                 
@@ -1000,6 +993,11 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             `;
 
             modalScrollWrapper.innerHTML = projectHTML;
+
+            if (project.image) {
+                const previewSlot = modalScrollWrapper.querySelector("[data-portal-preview-slot]");
+                if (previewSlot) mountPortalPreviewCard(previewSlot, project.image, project.projectName);
+            }
         }
 
         // --- 4. Close Modals on Outside Click ---
