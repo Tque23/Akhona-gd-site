@@ -23,9 +23,8 @@ import SpeedInsights from '@vercel/speed-insights/astro';
     <meta property="og:image" content="https://azungu.co.za/assets/images/logo/man.png">
     <meta property="og:site_name" content="Graphic Design by Akhona Zungu">
 
-    <!-- For your modern SVG icon -->
-        <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-        <link rel="alternate icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
 
     <link rel="stylesheet" href="assets/css/plugins/swiper.css">
     <link rel="stylesheet" href="assets/css/plugins/odometer.css">
@@ -169,11 +168,15 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="#" class="openLoginModal">Log In</a>
-                    </li>
-                    <li>
-                        <a href="#" class="openServicesModal">Start Your Project</a>
+                    <li class="has-dropdown">
+                        <a href="#">Client Portal
+                            <i class="fa-regular fa-chevron-down" aria-hidden="true"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="#" class="openServicesModal">Start Your Project</a></li>
+                            <li><a href="#" class="openLoginModal">Log In</a></li>
+                            <li><a href="help.html">Help</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="/comingsoon">Gallery</a>
@@ -188,7 +191,6 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                     <div class="social-link">
                         <a href="https://www.instagram.com/aszungu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
                         <a href="https://www.linkedin.com/in/aszungu" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="https://wa.me/27774204639" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -357,7 +359,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             align-content: center;
             gap: 16px;
             color: #ffffff;
-            background: rgba(10, 10, 12, 0.34);
+            background: transparent;
             pointer-events: none;
             opacity: 1;
             transition: opacity 180ms ease;
@@ -404,6 +406,18 @@ import SpeedInsights from '@vercel/speed-insights/astro';
 
         .portal-preview-loader.is-error .portal-preview-loader__label {
             color: #ffd4d4;
+        }
+
+        /* Do not reveal the frame, controls, or image until it has loaded. */
+        .portal-image-viewer.is-loading .portal-image-viewer__bubble {
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            animation: none;
+        }
+
+        .portal-image-viewer.is-ready .portal-image-viewer__bubble {
+            animation: portal-preview-bubble-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
         }
 
         .portal-image-viewer__image {
@@ -659,22 +673,22 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             loginModal.classList.add("show");
 
             const viewer = document.createElement("div");
-            viewer.className = "portal-image-viewer";
+            viewer.className = "portal-image-viewer is-loading";
             viewer.setAttribute("role", "dialog");
             viewer.setAttribute("aria-modal", "true");
             viewer.setAttribute("aria-label", description || "Project preview");
             viewer.innerHTML = `
                 <div class="portal-image-viewer__backdrop" data-preview-close></div>
+                <div class="portal-preview-loader" data-preview-loader role="status" aria-live="polite">
+                    <div class="portal-preview-loader__mark" aria-hidden="true">
+                        <span class="portal-preview-loader__cube portal-preview-loader__cube--colour"></span>
+                        <span class="portal-preview-loader__cube portal-preview-loader__cube--glass"></span>
+                    </div>
+                    <span class="portal-preview-loader__label" data-preview-loader-label>Loading preview…</span>
+                </div>
                 <section class="portal-image-viewer__bubble">
                     <button class="portal-image-viewer__close" type="button" data-preview-close aria-label="Close preview"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
                     <div class="portal-image-viewer__stage">
-                        <div class="portal-preview-loader" data-preview-loader role="status" aria-live="polite">
-                            <div class="portal-preview-loader__mark" aria-hidden="true">
-                                <span class="portal-preview-loader__cube portal-preview-loader__cube--colour"></span>
-                                <span class="portal-preview-loader__cube portal-preview-loader__cube--glass"></span>
-                            </div>
-                            <span class="portal-preview-loader__label" data-preview-loader-label>Loading preview…</span>
-                        </div>
                         <img class="portal-image-viewer__image is-loading" draggable="false">
                     </div>
                     <div class="portal-image-viewer__controls" aria-label="Image zoom controls">
@@ -724,6 +738,8 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                 previewState = "loaded";
                 fitViewerToImage();
                 image.classList.remove("is-loading");
+                viewer.classList.remove("is-loading");
+                viewer.classList.add("is-ready");
                 loader?.classList.add("is-hidden");
                 window.setTimeout(() => {
                     if (previewState === "loaded" && loader) loader.hidden = true;
