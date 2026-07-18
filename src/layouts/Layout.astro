@@ -326,6 +326,100 @@ import SpeedInsights from '@vercel/speed-insights/astro';
         .modal-scroll-wrapper::-webkit-scrollbar-thumb:hover {
             background: rgba(150, 150, 150, 0.7);
         }
+
+        /* Loading treatment for sign-in and protected previews. */
+        .shimmer-text {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, #ffffff 50%, rgba(255, 255, 255, 0.4) 100%);
+            background-size: 200% auto;
+            color: transparent !important;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmer-load 1.5s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes shimmer-load {
+            from { background-position: 200% center; }
+            to { background-position: -200% center; }
+        }
+
+        /* This is scoped to the project preview so it cannot clash with other loaders. */
+        .portal-image-viewer__stage {
+            position: relative;
+            isolation: isolate;
+        }
+
+        .portal-preview-loader {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: grid;
+            place-items: center;
+            align-content: center;
+            gap: 16px;
+            color: #ffffff;
+            background: rgba(10, 10, 12, 0.34);
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 180ms ease;
+        }
+
+        .portal-preview-loader.is-hidden {
+            opacity: 0;
+        }
+
+        .portal-preview-loader__mark {
+            position: relative;
+            width: 72px;
+            height: 72px;
+        }
+
+        .portal-preview-loader__cube {
+            position: absolute;
+            inset: 8px;
+            border-radius: 12px;
+        }
+
+        .portal-preview-loader__cube--colour {
+            background: linear-gradient(135deg, #ffca18, #ff6f00);
+            filter: blur(5px);
+            animation: portal-preview-loader-spin 1.5s ease-in-out infinite;
+        }
+
+        .portal-preview-loader__cube--glass {
+            border: 2px solid rgba(255, 255, 255, 0.62);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.38);
+        }
+
+        .portal-preview-loader__label {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .portal-preview-loader.is-error .portal-preview-loader__cube--colour {
+            animation: none;
+            background: #e45b5b;
+        }
+
+        .portal-preview-loader.is-error .portal-preview-loader__label {
+            color: #ffd4d4;
+        }
+
+        .portal-image-viewer__image {
+            opacity: 1;
+            transition: transform 150ms ease, opacity 180ms ease;
+        }
+
+        .portal-image-viewer__image.is-loading {
+            opacity: 0;
+        }
+
+        @keyframes portal-preview-loader-spin {
+            0%, 100% { transform: rotate(0deg) scale(0.92); }
+            50% { transform: rotate(-90deg) scale(1); }
+        }
     </style>
 
     <div id="servicesModal" class="portfolio-modal-overlay">
@@ -555,7 +649,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
         const originalLoginHTML = modalScrollWrapper.innerHTML; 
 
         // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
-        const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbyY6rn9n60hYEbLCs7U6htoCM4dWxNjVvZxuNt44GyE6JCduuHhipzl_Z4Oq6tMCgY40w/exec";
+        const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbys6hUSU-zPewgXmP5YNcQGizJJL1zu-sR8XjA7YZeP31P4y3Da8Ol6GzTZO7kzqtq5rg/exec";
 
         // Store the client's projects in memory after login
         let clientProjects = [];
@@ -574,7 +668,16 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                 <div class="portal-image-viewer__backdrop" data-preview-close></div>
                 <section class="portal-image-viewer__bubble">
                     <button class="portal-image-viewer__close" type="button" data-preview-close aria-label="Close preview"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-                    <div class="portal-image-viewer__stage"><img class="portal-image-viewer__image" draggable="false"></div>
+                    <div class="portal-image-viewer__stage">
+                        <div class="portal-preview-loader" data-preview-loader role="status" aria-live="polite">
+                            <div class="portal-preview-loader__mark" aria-hidden="true">
+                                <span class="portal-preview-loader__cube portal-preview-loader__cube--colour"></span>
+                                <span class="portal-preview-loader__cube portal-preview-loader__cube--glass"></span>
+                            </div>
+                            <span class="portal-preview-loader__label" data-preview-loader-label>Loading preview…</span>
+                        </div>
+                        <img class="portal-image-viewer__image is-loading" draggable="false">
+                    </div>
                     <div class="portal-image-viewer__controls" aria-label="Image zoom controls">
                         <button type="button" data-preview-zoom-out aria-label="Zoom out"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
                         <button type="button" data-preview-reset aria-label="Reset zoom"><span data-preview-zoom-label>100%</span></button>
@@ -587,10 +690,13 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             const stage = viewer.querySelector(".portal-image-viewer__stage");
             const bubble = viewer.querySelector(".portal-image-viewer__bubble");
             const zoomLabel = viewer.querySelector("[data-preview-zoom-label]");
+            const loader = viewer.querySelector("[data-preview-loader]");
+            const loaderLabel = viewer.querySelector("[data-preview-loader-label]");
             let scale = 1;
             let offsetX = 0;
             let offsetY = 0;
             let dragStart = null;
+            let previewState = "loading";
 
             image.alt = description || "Project preview";
 
@@ -610,9 +716,32 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                 stage.style.height = `${Math.round(imageHeight)}px`;
             };
 
-            const onResize = () => fitViewerToImage();
-            image.addEventListener("load", fitViewerToImage);
-            image.src = source;
+            const onResize = () => {
+                if (previewState === "loaded") fitViewerToImage();
+            };
+
+            const revealImage = () => {
+                if (previewState !== "loading" || !image.naturalWidth) return;
+                previewState = "loaded";
+                fitViewerToImage();
+                image.classList.remove("is-loading");
+                loader?.classList.add("is-hidden");
+                window.setTimeout(() => {
+                    if (previewState === "loaded" && loader) loader.hidden = true;
+                }, 180);
+            };
+
+            const showImageError = () => {
+                if (previewState !== "loading") return;
+                previewState = "error";
+                image.hidden = true;
+                loader?.classList.add("is-error");
+                loader?.setAttribute("aria-label", "Preview could not be loaded");
+                if (loaderLabel) loaderLabel.textContent = "Preview unavailable";
+            };
+
+            image.addEventListener("load", revealImage, { once: true });
+            image.addEventListener("error", showImageError, { once: true });
 
             const updateImage = () => {
                 image.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
@@ -683,7 +812,15 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             document.addEventListener("keydown", onKeyDown);
             document.addEventListener("copy", preventCopy);
             window.addEventListener("resize", onResize);
-            if (image.complete) fitViewerToImage();
+            if (!source) {
+                showImageError();
+            } else {
+                image.src = source;
+                if (image.complete) {
+                    if (image.naturalWidth > 0) revealImage();
+                    else window.setTimeout(showImageError, 0);
+                }
+            }
             activePreviewClose = close;
             viewer.querySelector(".portal-image-viewer__close").focus();
         }
@@ -728,8 +865,11 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             if (!form) return;
 
             const submitBtnText = form.querySelector(".btn-text");
-            const setSubmitButtonText = (text) => {
-                if (submitBtnText) submitBtnText.innerText = text;
+            const setSubmitButtonText = (text, isShimmering = false) => {
+                if (submitBtnText) {
+                    submitBtnText.innerText = text;
+                    submitBtnText.classList.toggle("shimmer-text", isShimmering);
+                }
             };
 
             form.addEventListener("submit", async function(e) {
@@ -738,13 +878,13 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                 const user = document.getElementById("lognProject").value;
                 const otp = document.getElementById("lognOTP").value;
                 
-                setSubmitButtonText("Authenticating...");
+                setSubmitButtonText("Authenticating...", true);
 
                 try {
                     const response = await fetch(GOOGLE_API_URL, {
                         method: "POST",
                         body: JSON.stringify({ user, otp }),
-                        headers: { "Content-Type": "text/plain;charset=utf-8" } // Bypass preflight issues
+                        headers: { "Content-Type": "text/plain;charset=utf-8" }
                     });
                     
                     const data = await response.json();
@@ -754,11 +894,11 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                         window.renderDashboard();
                     } else {
                         alert(data.message);
-                        setSubmitButtonText("Submit");
+                        setSubmitButtonText("Submit", false);
                     }
                 } catch (error) {
                     alert("Connection error. Please try again.");
-                    setSubmitButtonText("Submit");
+                    setSubmitButtonText("Submit", false);
                 }
             });
         }
@@ -768,17 +908,19 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             
             // Use .map and .join to insert the HR line between items
             dashboardHTML += clientProjects.map((project, index) => {
-                const isPaid = project.paid === 'TRUE';
+                const isPaid = project.paid === true || String(project.paid).toLowerCase() === 'true';
+                const paymentText = isPaid ? "Paid" : "Outstanding Payment";
+                const paymentColor = isPaid ? "green" : "red";
                 
                 // This is the HTML for the project card
                 let card = `
                     <div class="portal-project-card" onclick="window.renderProjectView(${index})">
                         <div class="portal-project-info">
-                            <h4>${project.projectName}</h4>
-                            <span class="portal-tag">${project.projectType}</span>
+                            <h4>${project.projectType}</h4>
+                            <span class="portal-tag">${project.projectCompletion}</span>
                         </div>
                         <div class="portal-project-arrow">
-                            <span class="portal-view-text">View</span>
+                            <span class="portal-view-text" style="color: ${paymentColor}; font-weight: bold;">${paymentText}</span>
                             <i class="fa-solid fa-chevron-right"></i>
                         </div>
                     </div>
@@ -813,8 +955,8 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                     <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
                 </button>
                 
-                <h3 class="modal-title" style="margin-top:20px;">${project.projectName}</h3>
-                <span class="portal-tag mb--20" style="display:inline-block;">${project.projectType}</span>
+                <h3 class="modal-title" style="margin-top:20px;">${project.projectType}</h3>
+                <span class="portal-tag mb--20" style="display:inline-block; color: ${isPaid ? 'green' : 'red'}; font-weight: bold;">${isPaid ? 'Paid' : 'Outstanding Payment'}</span>
                 
                 ${project.image ? `
                     <div class="portal-preview-img mb--20">
