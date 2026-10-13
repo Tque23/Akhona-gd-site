@@ -10,6 +10,15 @@ import SpeedInsights from '@vercel/speed-insights/astro';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#060606">
+    <meta name="color-scheme" content="dark">
+    <style>
+        html,
+        body {
+            background: #060606;
+            color-scheme: dark;
+        }
+    </style>
 
     <title>Akhona Zungu | Digital Marketer & Front-End Developer in South Africa</title>
     <meta name="description" content="Akhona Zungu is a South African Digital Marketer and Front-End Developer specializing in high-performance websites, branding, and social media strategies that drive measurable business growth.">
@@ -22,15 +31,22 @@ import SpeedInsights from '@vercel/speed-insights/astro';
     <meta property="og:url" content="https://azungu.co.za/">
     <meta property="og:image" content="https://azungu.co.za/assets/images/logo/man.png">
     <meta property="og:site_name" content="Graphic Design by Akhona Zungu">
+    <meta property="og:locale" content="en_ZA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Akhona Zungu | Digital Strategy & Web Development">
+    <meta name="twitter:description" content="Web development, branding, and social media strategies designed to elevate modern businesses.">
+    <meta name="twitter:image" content="https://azungu.co.za/assets/images/logo/man.png">
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="/assets/images/logo/man.png">
     <link rel="alternate icon" href="/favicon.ico">
 
-    <link rel="stylesheet" href="assets/css/plugins/swiper.css">
-    <link rel="stylesheet" href="assets/css/plugins/odometer.css">
-    <link rel="stylesheet" href="assets/css/vendor/animate.min.css">
-    <link rel="stylesheet" href="assets/css/vendor/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/plugins/swiper.css">
+    <link rel="stylesheet" href="/assets/css/plugins/odometer.css">
+    <link rel="stylesheet" href="/assets/css/vendor/animate.min.css">
+    <link rel="stylesheet" href="/assets/css/vendor/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     
@@ -45,8 +61,8 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                     <div class="header-content">
                         <div class="logo">
                             <a href="/">
-                                <img class="logo-dark" src="assets/images/logo/white-logo-reeni-2.png" alt="Akhona Zungu Dark Logo">
-                                <img class="logo-white" src="assets/images/logo/logo-white.png" alt="Akhona Zungu White Logo">
+                                <img class="logo-dark" src="/assets/images/logo/white-logo-reeni-2.png" alt="Akhona Zungu Dark Logo">
+                                <img class="logo-white" src="/assets/images/logo/logo-white.png" alt="Akhona Zungu White Logo">
                             </a>
                         </div>
                         <nav class="tmp-mainmenu-nav d-none d-xl-block">
@@ -95,8 +111,8 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             <div class="inner">
                 <div class="top-area">
                     <a href="/" class="logo">
-                        <img class="logo-dark" src="assets/images/logo/white-logo-reeni.png" alt="Akhona Zungu Dark Logo">
-                        <img class="logo-white" src="assets/images/logo/logo-white.png" alt="Akhona Zungu White Logo">
+                        <img class="logo-dark" src="/assets/images/logo/white-logo-reeni.png" alt="Akhona Zungu Dark Logo">
+                        <img class="logo-white" src="/assets/images/logo/logo-white.png" alt="Akhona Zungu White Logo">
                     </a>
                     <div class="close-icon-area">
                         <button class="tmp-round-action-btn close_side_menu_active">
@@ -107,7 +123,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                 <div class="content-wrapper">
                     <div class="image-area-feature">
                         <a href="/">
-                            <img src="assets/images/logo/man.png" alt="Akhona Zungu Avatar">
+                            <img src="/assets/images/logo/man.png" alt="Akhona Zungu Avatar">
                         </a>
                     </div>
                     <h5 class="title mt--30">A Digital Strategist with a Creative Edge</h5>
@@ -154,8 +170,8 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                 <div class="header-top">
                     <div class="logo">
                         <a href="/" class="logo-area">
-                            <img class="logo-dark" src="assets/images/logo/white-logo-reeni.png" alt="Akhona Zungu Dark Logo">
-                            <img class="logo-white" src="assets/images/logo/logo-white.png" alt="Akhona Zungu White Logo">
+                            <img class="logo-dark" src="/assets/images/logo/white-logo-reeni.png" alt="Akhona Zungu Dark Logo">
+                            <img class="logo-white" src="/assets/images/logo/logo-white.png" alt="Akhona Zungu White Logo">
                         </a>
                     </div>
                     <div class="close-menu">
@@ -205,7 +221,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                         <div class="single-footer-wrapper border-right mr--20">
                             <div class="logo">
                                 <a href="/">
-                                    <img src="assets/images/logo/white-logo-reeni.png" alt="Akhona Zungu Footer Logo">
+                                    <img src="/assets/images/logo/white-logo-reeni.png" alt="Akhona Zungu Footer Logo">
                                 </a>
                             </div>
                             <p class="description"><span>Get Ready</span> For <br>Great Creations</p>
@@ -223,7 +239,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
                                 <li><a href="#" class="openLoginModal">Log In</a></li>
                                 <li><a href="/comingsoon">Gallery</a></li>
                                 <li><a href="/contact">Contact</a></li>
-                                <li><a href="help.html">Help</a></li>
+                                <li><a href="/contact">Help</a></li>
                             </ul>
                         </div>
                     </div>
@@ -247,7 +263,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
             </div>
         </div>
         <div class="footer-bg-img">
-            <img src="assets/images/footer/footer-bg-img.png" alt="" aria-hidden="true">
+            <img src="/assets/images/footer/footer-bg-img.png" alt="" aria-hidden="true">
         </div>
     </footer>
     <div class="copyright-area-one">
@@ -561,26 +577,26 @@ import SpeedInsights from '@vercel/speed-insights/astro';
         </div>
     </div>
 
-    <script is:inline src="assets/js/vendor/jquery.js"></script>
-    <script is:inline src="assets/js/vendor/jquery-ui.min.js"></script>
-    <script is:inline src="assets/js/vendor/waypoints.min.js"></script>
-    <script is:inline src="assets/js/plugins/odometer.js"></script>
-    <script is:inline src="assets/js/vendor/appear.js"></script>
-    <script is:inline src="assets/js/vendor/jquery-one-page-nav.js"></script>
-    <script is:inline src="assets/js/plugins/swiper.js"></script>
-    <script is:inline src="assets/js/plugins/gsap.js"></script>
-    <script is:inline src="assets/js/plugins/splittext.js"></script>
-    <script is:inline src="assets/js/plugins/scrolltigger.js"></script>
-    <script is:inline src="assets/js/plugins/scrolltoplugins.js"></script>
-    <script is:inline src="assets/js/plugins/smoothscroll.js"></script>
-    <script is:inline src="assets/js/vendor/bootstrap.min.js"></script>
-    <script is:inline src="assets/js/vendor/waw.js"></script>
-    <script is:inline src="assets/js/plugins/isotop.js"></script>
-    <script is:inline src="assets/js/plugins/animation.js"></script>
-    <script is:inline src="assets/js/plugins/contact.form.js"></script>
-    <script is:inline src="assets/js/vendor/backtop.js"></script>
-    <script is:inline src="assets/js/plugins/text-type.js"></script>
-    <script is:inline src="assets/js/main.js"></script>
+    <script is:inline src="/assets/js/vendor/jquery.js"></script>
+    <script is:inline src="/assets/js/vendor/jquery-ui.min.js"></script>
+    <script is:inline src="/assets/js/vendor/waypoints.min.js"></script>
+    <script is:inline src="/assets/js/plugins/odometer.js"></script>
+    <script is:inline src="/assets/js/vendor/appear.js"></script>
+    <script is:inline src="/assets/js/vendor/jquery-one-page-nav.js"></script>
+    <script is:inline src="/assets/js/plugins/swiper.js"></script>
+    <script is:inline src="/assets/js/plugins/gsap.js"></script>
+    <script is:inline src="/assets/js/plugins/splittext.js"></script>
+    <script is:inline src="/assets/js/plugins/scrolltigger.js"></script>
+    <script is:inline src="/assets/js/plugins/scrolltoplugins.js"></script>
+    <script is:inline src="/assets/js/plugins/smoothscroll.js"></script>
+    <script is:inline src="/assets/js/vendor/bootstrap.min.js"></script>
+    <script is:inline src="/assets/js/vendor/waw.js"></script>
+    <script is:inline src="/assets/js/plugins/isotop.js"></script>
+    <script is:inline src="/assets/js/plugins/animation.js"></script>
+    <script is:inline src="/assets/js/plugins/contact.form.js"></script>
+    <script is:inline src="/assets/js/vendor/backtop.js"></script>
+    <script is:inline src="/assets/js/plugins/text-type.js"></script>
+    <script is:inline src="/assets/js/main.js"></script>
 
     <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
 
