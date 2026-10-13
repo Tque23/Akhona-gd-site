@@ -23,40 +23,119 @@ import Layout from '../layouts/Layout.astro';
             </div>
         </div>
 
-        <section class="get-in-touch-area tmp-section-gap coming-soon-section">
-            <div class="container">
-            <div class="contact-get-in-touch-wrap">
-                <div class="get-in-touch-wrapper tmponhover tmp-scroll-trigger tmp-fade-in">
-                    <div class="glass-panel">
-                        <div class="brand">AZungu Graphic Design</div>
-                        
-                        <h1 class="title">
-                            Something new is <span class="highlight">SPROUTING.</span>
-                        </h1>
-                        
-                        <p class="description">
-                            I'm currently crafting a new digital experience to showcase my latest visual work and creative projects. 
-                            Drop your email below to be the first to know when the full portfolio goes live.
-                        </p>
+        <main class="gallery-page">
+            <section class="gallery-intro tmp-section-gap">
+                <div class="container">
+                    <div class="gallery-intro-copy tmp-scroll-trigger tmp-fade-in">
+                        <span class="section-kicker">Selected visual work</span>
+                        <h2 class="gallery-heading">Ideas made <span>visible.</span></h2>
+                        <p>Explore a selection of brand, campaign, and digital design work created for ambitious businesses.</p>
+                    </div>
+                </div>
+            </section>
 
-                        <div class="button-area-banner-three tmp-scroll-trigger tmp-fade-in animation-order-3">
-                            <a class="tmp-btn hover-icon-reverse radius-round" href="javascript:void(0);" id="openPortfolioModal">
-                                <span class="icon-reverse-wrapper">
-                                    <span class="btn-text">Be The First To Know</span>
-                                    <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
-                                    <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right" aria-hidden="true"></i></span>
-                                </span>
-                            </a>
+            <section class="gallery-showcase tmp-section-gap" aria-label="Graphic design work">
+                <div class="container">
+                    {[
+                        { title: 'Posters', intro: 'Campaign artwork built to stop the scroll.', images: ['01.webp', '02.webp', '03.webp', '04.webp'] },
+                        { title: 'Logos', intro: 'Distinctive marks for brands with direction.', images: ['company-logo-1.svg', 'company-logo-2.svg', 'company-logo-3.svg', 'company-logo-4.svg'] },
+                        { title: 'Banners', intro: 'Big, clear visuals that carry the message.', images: ['portfoli-img-5.jpg', 'portfoli-img-6.jpg', 'portfoli-img-7.jpg', 'portfoli-img-8.jpg'] }
+                    ].map((collection) => (
+                        <article class="gallery-collection tmp-scroll-trigger tmp-fade-in">
+                            <div class="collection-heading">
+                                <div>
+                                    <span class="section-kicker">01 / 03</span>
+                                    <h3>{collection.title}</h3>
+                                    <p>{collection.intro}</p>
+                                </div>
+                                <div class="slider-controls" aria-label={`${collection.title} slider controls`}>
+                                    <button class="gallery-arrow gallery-prev" type="button" aria-label={`Previous ${collection.title}`}>←</button>
+                                    <button class="gallery-arrow gallery-next" type="button" aria-label={`Next ${collection.title}`}>→</button>
+                                </div>
+                            </div>
+                            <div class="gallery-slider" tabindex="0">
+                                {collection.images.map((image, index) => (
+                                    <figure class="gallery-slide">
+                                        <img src={`/assets/images/${collection.title === 'Logos' ? 'our-supported-company' : collection.title === 'Posters' ? 'portfolio' : 'latest-portfolio'}/${image}`} alt={`${collection.title} design example ${index + 1}`} loading="lazy" decoding="async" />
+                                        <figcaption>{collection.title} / {String(index + 1).padStart(2, '0')}</figcaption>
+                                    </figure>
+                                ))}
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </section>
+
+            <section class="web-projects tmp-section-gap" aria-labelledby="web-projects-title">
+                <div class="container">
+                    <div class="collection-heading web-projects-heading">
+                        <div>
+                            <span class="section-kicker">Digital experiences</span>
+                            <h2 id="web-projects-title">Websites completed.</h2>
+                            <p>Websites designed and developed with clarity, character, and conversion in mind.</p>
+                        </div>
+                    </div>
+                    <div class="web-project-grid">
+                        <a class="web-project-card" href="https://distinguisheddaniel.com" target="_blank" rel="noopener noreferrer">
+                            <div class="web-project-preview"><img src="/assets/images/latest-portfolio/portfoli-img-1.jpg" alt="Preview of Distinguished Daniel website project" loading="lazy" /></div>
+                            <div class="web-project-meta"><span>Live website</span><h3>Distinguished Daniel</h3><span class="project-link">Visit site <span aria-hidden="true">↗</span></span></div>
+                        </a>
+                        <div class="web-project-card web-project-card-muted">
+                            <div class="web-project-preview"><img src="/assets/images/latest-portfolio/portfoli-img-2.jpg" alt="Preview of another website project" loading="lazy" /></div>
+                            <div class="web-project-meta"><span>Coming next</span><h3>More digital experiences</h3><span class="project-link">Portfolio update soon</span></div>
                         </div>
                     </div>
                 </div>
-            </div>
-            </div>
-        </section>
+            </section>
+        </main>
     </div>
 </Layout>
 
+<style>
+    .gallery-page { position: relative; z-index: 1; }
+    .gallery-intro { padding-bottom: 20px; }
+    .gallery-intro-copy { max-width: 760px; }
+    .section-kicker { display: block; color: #a7ff4f; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 16px; }
+    .gallery-heading, .web-projects h2 { margin: 0 0 18px; font-size: clamp(42px, 6vw, 78px); line-height: .98; letter-spacing: -.05em; }
+    .gallery-heading span { color: #a7ff4f; }
+    .gallery-intro-copy p, .collection-heading p { max-width: 540px; color: rgba(255,255,255,.62); font-size: 16px; line-height: 1.7; margin: 0; }
+    .gallery-collection { padding: 34px 0 42px; border-top: 1px solid rgba(255,255,255,.14); }
+    .collection-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 24px; }
+    .collection-heading h3 { font-size: clamp(30px, 4vw, 48px); margin: 0 0 8px; letter-spacing: -.04em; }
+    .slider-controls { display: flex; gap: 10px; flex-shrink: 0; }
+    .gallery-arrow { width: 46px; height: 46px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; background: transparent; color: #fff; cursor: pointer; font-size: 22px; transition: .2s ease; }
+    .gallery-arrow:hover, .gallery-arrow:focus-visible { background: #a7ff4f; border-color: #a7ff4f; color: #111; }
+    .gallery-slider { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: #a7ff4f transparent; padding-bottom: 14px; }
+    .gallery-slide { flex: 0 0 min(76vw, 320px); margin: 0; scroll-snap-align: start; }
+    .gallery-slide img { display: block; width: 100%; height: 350px; object-fit: cover; border-radius: 10px; background: rgba(255,255,255,.06); }
+    .gallery-slide figcaption { color: rgba(255,255,255,.54); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin-top: 12px; }
+    .web-projects { padding-top: 48px; }
+    .web-projects-heading { align-items: start; }
+    .web-project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    .web-project-card { display: block; overflow: hidden; border: 1px solid rgba(255,255,255,.14); border-radius: 12px; background: rgba(255,255,255,.045); color: inherit; transition: transform .25s ease, border-color .25s ease; }
+    .web-project-card:hover { transform: translateY(-5px); border-color: #a7ff4f; }
+    .web-project-preview { height: 280px; overflow: hidden; background: #171717; }
+    .web-project-preview img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+    .web-project-card:hover img { transform: scale(1.04); }
+    .web-project-meta { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; padding: 22px; }
+    .web-project-meta span:first-child { grid-column: 1 / -1; color: #a7ff4f; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; }
+    .web-project-meta h3 { margin: 0; font-size: 24px; }
+    .project-link { color: rgba(255,255,255,.62); font-size: 13px; align-self: center; }
+    @media (max-width: 640px) { .collection-heading { align-items: start; flex-direction: column; } .web-project-grid { grid-template-columns: 1fr; } .gallery-slide img { height: 300px; } .web-project-preview { height: 220px; } }
+</style>
+
 <script>
+    document.querySelectorAll('.gallery-collection').forEach((collection) => {
+        const slider = collection.querySelector('.gallery-slider');
+        const previous = collection.querySelector('.gallery-prev');
+        const next = collection.querySelector('.gallery-next');
+        if (!slider || !previous || !next) return;
+        const distance = () => slider.clientWidth * 0.78;
+        previous.addEventListener('click', () => slider.scrollBy({ left: -distance(), behavior: 'smooth' }));
+        next.addEventListener('click', () => slider.scrollBy({ left: distance(), behavior: 'smooth' }));
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("DOMContentLoaded", () => {
         const canvas = document.getElementById('wave-canvas') as HTMLCanvasElement;
         
