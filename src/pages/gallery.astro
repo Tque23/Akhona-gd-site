@@ -3,21 +3,12 @@ import Layout from "../layouts/Layout.astro";
 
 const collections = [
   {
-    eyebrow: "01 / Print & Campaigns",
-    title: "Posters",
-    description:
-      "Bold compositions built to stop the scroll and start a conversation.",
-    images: [
-      ["/assets/images/bg/bg-image-4.jpg", "Editorial poster composition"],
-      ["/assets/images/bg/bg-image-5.jpg", "Campaign poster design"],
-      ["/assets/images/bg/bg-image-6.jpg", "Event poster artwork"],
-    ],
-  },
-  {
-    eyebrow: "02 / Identity Systems",
-    title: "Logos",
-    description:
-      "Distinctive marks and visual languages made to be remembered.",
+    eyebrow: "01 / Brand Identity",
+    title: "Brand Identity",
+    description: "A coherent visual language that makes your business easier to recognise and trust.",
+    services: "Logo, Business Cards, Letterheads, Presentation Templates",
+    idealClient: "Businesses establishing or refreshing their corporate identity.",
+    goal: "Establishing or refreshing corporate identity",
     images: [
       ["/assets/images/about/logo-1.svg", "Brand identity logo"],
       ["/assets/images/about/logo-2.svg", "Secondary brand identity logo"],
@@ -25,19 +16,28 @@ const collections = [
     ],
   },
   {
-    eyebrow: "03 / Digital Presence",
-    title: "Banners",
-    description:
-      "High-impact digital artwork that gives every campaign room to breathe.",
+    eyebrow: "02 / Print & Event Design",
+    title: "Print & Event",
+    description: "Tactile campaign pieces designed to make your message impossible to miss offline.",
+    services: "Posters, Event Banners, Signage, Promotional Assets",
+    idealClient: "Brands preparing for offline marketing, trade shows, and campaigns.",
+    goal: "Offline marketing, trade shows, and campaigns",
     images: [
-      [
-        "/assets/images/banner/banner-background-one.jpg",
-        "Digital campaign banner",
-      ],
-      [
-        "/assets/images/banner/banner-background-02.jpg",
-        "Promotional web banner",
-      ],
+      ["/assets/images/bg/bg-image-4.jpg", "Editorial poster composition"],
+      ["/assets/images/bg/bg-image-5.jpg", "Campaign poster design"],
+      ["/assets/images/bg/bg-image-6.jpg", "Event poster artwork"],
+    ],
+  },
+  {
+    eyebrow: "03 / Web & Digital",
+    title: "Web & Digital",
+    description: "Clear, expressive digital experiences that turn attention into meaningful action.",
+    services: "Website Design & Build, Digital Banners, Interactive UI",
+    idealClient: "Businesses building an online presence and driving conversions.",
+    goal: "Building an online presence and driving conversions",
+    images: [
+      ["/assets/images/banner/banner-background-one.jpg", "Digital campaign banner"],
+      ["/assets/images/banner/banner-background-02.jpg", "Promotional web banner"],
       ["/assets/images/banner/banner-background-04.jpg", "Brand story banner"],
     ],
   },
@@ -65,8 +65,8 @@ const collections = [
         <span class="section-number">01—03</span>
         <h2>The visual<br /><em>archive.</em></h2>
         <p>
-          Move through the work. Each collection is a small study in clarity,
-          character, and connection.
+          Explore the pillars behind the work. Each collection pairs a clear
+          service offering with the audience and outcome it is built to serve.
         </p>
       </div>
 
@@ -82,6 +82,20 @@ const collections = [
                 <h3 id={`collection-${collectionIndex}`}>{collection.title}</h3>
               </div>
               <p>{collection.description}</p>
+            </div>
+            <div class="service-guide" aria-label={`${collection.title} service details`}>
+              <div>
+                <span class="guide-label">Included services</span>
+                <p>{collection.services}</p>
+              </div>
+              <div>
+                <span class="guide-label">Ideal client</span>
+                <p>{collection.idealClient}</p>
+              </div>
+              <div>
+                <span class="guide-label">The goal</span>
+                <p>{collection.goal}</p>
+              </div>
             </div>
             <div class="slider" data-slider>
               <div class="slides">
@@ -323,6 +337,38 @@ const collections = [
     max-width: 250px;
     margin: 0;
   }
+  .service-guide {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 0;
+    margin-bottom: 28px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .service-guide > div {
+    padding: 18px 22px 20px 0;
+    border-right: 1px solid var(--line);
+  }
+  .service-guide > div:not(:first-child) {
+    padding-left: 22px;
+  }
+  .service-guide > div:last-child {
+    border-right: 0;
+  }
+  .guide-label {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font: 600 10px/1.2 var(--font-primary);
+  }
+  .service-guide p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.45;
+  }
   .slider {
     position: relative;
   }
@@ -513,6 +559,18 @@ const collections = [
     .website-intro,
     .website-meta {
       display: block;
+    }
+    .service-guide {
+      grid-template-columns: 1fr;
+    }
+    .service-guide > div,
+    .service-guide > div:not(:first-child) {
+      padding: 16px 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .service-guide > div:last-child {
+      border-bottom: 0;
     }
     .collection-heading p,
     .website-intro p {
