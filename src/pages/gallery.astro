@@ -1,0 +1,529 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const collections = [
+  {
+    eyebrow: "01 / Print & Campaigns",
+    title: "Posters",
+    description:
+      "Bold compositions built to stop the scroll and start a conversation.",
+    images: [
+      ["/assets/images/bg/bg-image-4.jpg", "Editorial poster composition"],
+      ["/assets/images/bg/bg-image-5.jpg", "Campaign poster design"],
+      ["/assets/images/bg/bg-image-6.jpg", "Event poster artwork"],
+    ],
+  },
+  {
+    eyebrow: "02 / Identity Systems",
+    title: "Logos",
+    description:
+      "Distinctive marks and visual languages made to be remembered.",
+    images: [
+      ["/assets/images/about/logo-1.svg", "Brand identity logo"],
+      ["/assets/images/about/logo-2.svg", "Secondary brand identity logo"],
+      ["/assets/images/banner/logo-under-image.png", "Logo presentation"],
+    ],
+  },
+  {
+    eyebrow: "03 / Digital Presence",
+    title: "Banners",
+    description:
+      "High-impact digital artwork that gives every campaign room to breathe.",
+    images: [
+      [
+        "/assets/images/banner/banner-background-one.jpg",
+        "Digital campaign banner",
+      ],
+      [
+        "/assets/images/banner/banner-background-02.jpg",
+        "Promotional web banner",
+      ],
+      ["/assets/images/banner/banner-background-04.jpg", "Brand story banner"],
+    ],
+  },
+];
+---
+
+<Layout>
+  <div class="gallery-page">
+    <section class="gallery-hero">
+      <div class="hero-kicker"><span></span> Selected work / 2025—26</div>
+      <h1>Ideas made<br /><em>visible.</em></h1>
+      <p class="hero-copy">
+        A considered selection of visual identities, campaign pieces, and
+        digital experiences crafted for brands with something to say.
+      </p>
+      <a
+        class="scroll-cue"
+        href="#collections"
+        aria-label="Scroll to selected work">Scroll to explore <span>↓</span></a
+      >
+    </section>
+
+    <section class="collections" id="collections">
+      <div class="section-intro">
+        <span class="section-number">01—03</span>
+        <h2>The visual<br /><em>archive.</em></h2>
+        <p>
+          Move through the work. Each collection is a small study in clarity,
+          character, and connection.
+        </p>
+      </div>
+
+      {
+        collections.map((collection, collectionIndex) => (
+          <section
+            class="collection"
+            aria-labelledby={`collection-${collectionIndex}`}
+          >
+            <div class="collection-heading">
+              <div>
+                <span class="eyebrow">{collection.eyebrow}</span>
+                <h3 id={`collection-${collectionIndex}`}>{collection.title}</h3>
+              </div>
+              <p>{collection.description}</p>
+            </div>
+            <div class="slider" data-slider>
+              <div class="slides">
+                {collection.images.map(([src, alt], imageIndex) => (
+                  <figure
+                    class:list={{ slide: true, active: imageIndex === 0 }}
+                  >
+                    <img
+                      src={src}
+                      alt={alt}
+                      loading={
+                        collectionIndex === 0 && imageIndex === 0
+                          ? "eager"
+                          : "lazy"
+                      }
+                    />
+                    <figcaption>
+                      <span>0{imageIndex + 1}</span> / {collection.title}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+              <div class="slider-controls">
+                <button
+                  type="button"
+                  data-prev
+                  aria-label={`Previous ${collection.title} image`}
+                >
+                  ←
+                </button>
+                <div class="progress" aria-hidden="true">
+                  <span data-progress />
+                </div>
+                <button
+                  type="button"
+                  data-next
+                  aria-label={`Next ${collection.title} image`}
+                >
+                  →
+                </button>
+              </div>
+            </div>
+          </section>
+        ))
+      }
+    </section>
+
+    <section class="websites" id="websites">
+      <div class="website-intro">
+        <span class="section-number">Web</span>
+        <h2>Websites<br /><em>in the wild.</em></h2>
+        <p>
+          Digital homes designed to feel as considered as the brands they
+          represent.
+        </p>
+      </div>
+      <article class="website-card">
+        <div class="browser-bar">
+          <span></span><span></span><span></span><small
+            >distinguisheddaniel.com</small>
+        </div>
+        <div class="website-preview">
+          <iframe
+            src="https://distinguisheddaniel.com"
+            title="Preview of distinguisheddaniel.com"
+            loading="lazy"></iframe>
+          <a
+            href="https://distinguisheddaniel.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="preview-link">Open live site <span>↗</span></a
+          >
+        </div>
+        <div class="website-meta">
+          <span>Distinguished Daniel</span><span
+            >Brand strategy · Web design · Development</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="gallery-cta">
+      <span class="section-number">Next project</span>
+      <h2>Have a story<br /><em>to tell?</em></h2>
+      <a href="/contact">Let&apos;s make it visible <span>↗</span></a>
+    </section>
+  </div>
+
+  <script>
+    document.querySelectorAll("[data-slider]").forEach((slider) => {
+      const slides = [...slider.querySelectorAll(".slide")];
+      const progress = slider.querySelector("[data-progress]");
+      let current = 0;
+      const show = (next) => {
+        current = (next + slides.length) % slides.length;
+        slides.forEach((slide, index) =>
+          slide.classList.toggle("active", index === current),
+        );
+        if (progress)
+          progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+      };
+      slider
+        .querySelector("[data-prev]")
+        ?.addEventListener("click", () => show(current - 1));
+      slider
+        .querySelector("[data-next]")
+        ?.addEventListener("click", () => show(current + 1));
+    });
+  </script>
+</Layout>
+
+<style>
+  :global(body) {
+    background: #080808;
+  }
+  .gallery-page {
+    --ink: #f4f0e9;
+    --muted: #9d9a93;
+    --line: rgba(244, 240, 233, 0.18);
+    --orange: #ff6600;
+    color: var(--ink);
+    background: #080808;
+    overflow: hidden;
+  }
+  .gallery-hero,
+  .collections,
+  .websites,
+  .gallery-cta {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: clamp(24px, 6vw, 88px);
+    padding-right: clamp(24px, 6vw, 88px);
+  }
+  .gallery-hero {
+    min-height: 88vh;
+    padding-top: clamp(150px, 20vh, 230px);
+    padding-bottom: 100px;
+    position: relative;
+  }
+  .hero-kicker,
+  .eyebrow,
+  .section-number {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font: 600 11px/1.2 var(--font-primary);
+    color: var(--orange);
+  }
+  .hero-kicker span {
+    display: inline-block;
+    width: 34px;
+    height: 1px;
+    background: var(--orange);
+    vertical-align: middle;
+    margin-right: 12px;
+  }
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    font-family: var(--font-secondary);
+    color: var(--ink);
+    font-weight: 400;
+    letter-spacing: -0.06em;
+  }
+  h1 {
+    font-size: clamp(72px, 13vw, 190px);
+    line-height: 0.82;
+    margin: 70px 0 44px;
+    max-width: 900px;
+  }
+  h1 em,
+  h2 em {
+    color: var(--orange);
+    font-style: normal;
+  }
+  .hero-copy {
+    max-width: 360px;
+    margin-left: 52%;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  .scroll-cue {
+    position: absolute;
+    bottom: 48px;
+    left: clamp(24px, 6vw, 88px);
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 10px;
+  }
+  .scroll-cue span {
+    color: var(--orange);
+    font-size: 20px;
+    margin-left: 18px;
+  }
+  .collections {
+    padding-top: 100px;
+  }
+  .section-intro {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 30px;
+    border-top: 1px solid var(--line);
+    padding-top: 22px;
+    margin-bottom: 140px;
+  }
+  .section-intro h2,
+  .website-intro h2,
+  .gallery-cta h2 {
+    font-size: clamp(46px, 7vw, 90px);
+    line-height: 0.9;
+  }
+  .section-intro p,
+  .website-intro p {
+    color: var(--muted);
+    max-width: 230px;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .collection {
+    margin-bottom: 150px;
+  }
+  .collection-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 30px;
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    margin-bottom: 28px;
+  }
+  h3 {
+    font-size: clamp(50px, 8vw, 110px);
+    line-height: 0.85;
+    margin-top: 20px;
+  }
+  .collection-heading p {
+    color: var(--muted);
+    max-width: 250px;
+    margin: 0;
+  }
+  .slider {
+    position: relative;
+  }
+  .slides {
+    height: clamp(320px, 57vw, 650px);
+    position: relative;
+    overflow: hidden;
+    background: #141414;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transform: scale(1.04);
+    transition:
+      opacity 0.55s ease,
+      transform 0.8s ease;
+  }
+  .slide.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .slide img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  .slide figcaption {
+    position: absolute;
+    bottom: 22px;
+    left: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 10px;
+  }
+  .slide figcaption span {
+    color: var(--orange);
+  }
+  .slider-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .slider-controls button {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.25s;
+  }
+  .slider-controls button:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+  .progress {
+    height: 1px;
+    background: var(--line);
+    flex: 1;
+    max-width: 180px;
+  }
+  .progress span {
+    display: block;
+    height: 1px;
+    background: var(--orange);
+    transition: width 0.35s ease;
+    width: 33.33%;
+  }
+  .websites {
+    padding-top: 50px;
+    padding-bottom: 180px;
+  }
+  .website-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 30px;
+    border-top: 1px solid var(--line);
+    padding-top: 22px;
+    margin-bottom: 48px;
+  }
+  .website-card {
+    border: 1px solid var(--line);
+    background: #111;
+  }
+  .browser-bar {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border-bottom: 1px solid var(--line);
+    padding: 0 18px;
+  }
+  .browser-bar > span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--orange);
+    opacity: 0.75;
+  }
+  .browser-bar small {
+    margin-left: 16px;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+  .website-preview {
+    height: clamp(320px, 52vw, 590px);
+    position: relative;
+    background: #fff;
+    overflow: hidden;
+  }
+  .website-preview iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #fff;
+  }
+  .preview-link {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background: var(--orange);
+    color: #080808;
+    padding: 12px 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font: 600 10px var(--font-primary);
+  }
+  .preview-link span {
+    font-size: 16px;
+    margin-left: 12px;
+  }
+  .website-meta {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px;
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .gallery-cta {
+    border-top: 1px solid var(--line);
+    padding-top: 30px;
+    padding-bottom: 180px;
+  }
+  .gallery-cta h2 {
+    margin: 60px 0;
+  }
+  .gallery-cta a {
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 11px;
+    border-bottom: 1px solid var(--orange);
+    padding-bottom: 8px;
+  }
+  .gallery-cta a span {
+    color: var(--orange);
+    font-size: 17px;
+    margin-left: 16px;
+  }
+  @media (max-width: 700px) {
+    .gallery-hero {
+      min-height: 76vh;
+    }
+    .hero-copy {
+      margin: 0;
+    }
+    .section-intro {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 90px;
+    }
+    .section-intro p {
+      margin-left: 20%;
+    }
+    .collection {
+      margin-bottom: 100px;
+    }
+    .collection-heading,
+    .website-intro,
+    .website-meta {
+      display: block;
+    }
+    .collection-heading p,
+    .website-intro p {
+      margin-top: 25px;
+    }
+    .website-intro h2 {
+      margin-top: 32px;
+    }
+    .website-meta span {
+      display: block;
+      margin-bottom: 8px;
+    }
+  }
+</style>
